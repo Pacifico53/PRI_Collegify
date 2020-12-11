@@ -7,17 +7,17 @@ html(lang="en")
     link(rel='stylesheet', href='stylesheets/loginstyle.css')
   body
     #main
-     form(action="#")
+     form(action="/users/signup" method="POST")
        div.label sign up to collegify
        div.username
-        input(label="name" type="text" placeholder="Name")
+        input(name="name" type="text" placeholder="Name")
        div.username
-        input(label="email" type="text" placeholder="Email")
+        input(name="email" type="text" placeholder="Email")
        div.username
-        input(label="username" type="text" placeholder="Username")
+        input(name="username" type="text" placeholder="Username")
        div.password
-        input(label="password" type="password" placeholder="Password")
-       button(type="button") Sign Up
+        input(name="password" type="password" placeholder="Password")
+       button(type="submit") Sign Up
        p
         | already a member?
         a(href="/login") Login now
