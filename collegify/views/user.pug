@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  .w3-card-4
+    if infouser != null
+      header.w3-container.w3-khaki
+        h3 #{infouser.name}
+      div(class="w3-container w3-sand")
+        p Username: #{infouser.username}
+        p Email: #{infouser.email}
+        p Password: #{infouser.password}
+    else
+      div(class="w3-container")
+        p Erro: User not found...
+    div(class="w3-container w3-khaki")
+      form(method='POST' action=`/users/delete/${infouser._id}`)
+        input(type='submit' value='Delete')
+      form(method='GET' action=`/users/update/${infouser._id}`)
+        input(type='submit' value='Edit')
+      p
+        a(href='/') Back to homepage.
+      p
+        a(href='/users') Back to user list.
+    footer(class="w3-container w3-khaki")
+      address Gerado por Collegify :: 2020

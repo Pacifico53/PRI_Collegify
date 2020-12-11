@@ -7,19 +7,19 @@ html(lang="en")
     link(rel='stylesheet', href='stylesheets/loginstyle.css')
   body
     #main
-     form(action="/users/signup" method="POST")
-       div.label sign up to collegify
-       div.username
-        input(name="name" type="text" placeholder="Name")
-       div.username
-        input(name="email" type="text" placeholder="Email")
-       div.username
-        input(name="username" type="text" placeholder="Username")
-       div.password
-        input(name="password" type="password" placeholder="Password")
-       button(type="submit") Sign Up
-       p
-        | already a member?
-        a(href="/login") Login now
-       p
-        a(href="/") Back to Homepage
+      form(action="/users/signup" method="POST")
+        div.label sign up to collegify
+        div.username
+          input(name="name" type="text" placeholder="Name")
+        div.username
+          input(name="email" type="text" placeholder="Email")
+        div.username
+          input(name="username" type="text" placeholder="Username")
+        div.password
+          input(name="password" type="password" placeholder="Password")
+        button(type="submit") Sign Up
+        p
+          | already a member?
+          a(href="/login") Login now
+        p
+          a(href="/") Back to Homepage
