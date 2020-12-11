@@ -1,7 +1,25 @@
-extends layout
-
-block content
-  .w3-card-4
-    header.w3-container.w3-khaki
-      h1 Sign Up
-    p(style="text-align:center;") This is the sign up page
+doctype html
+html(lang="en")
+  head
+    title Sign up Collegify
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    link(rel='stylesheet', href='stylesheets/loginstyle.css')
+  body
+    #main
+     form(action="#")
+       div.label sign up to collegify
+       div.username
+        input(label="name" type="text" placeholder="Name")
+       div.username
+        input(label="email" type="text" placeholder="Email")
+       div.username
+        input(label="username" type="text" placeholder="Username")
+       div.password
+        input(label="password" type="password" placeholder="Password")
+       button(type="button") Sign Up
+       p
+        | already a member?
+        a(href="/login") Login now
+       p
+        a(href="/") Back to Homepage
