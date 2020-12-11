@@ -1,7 +1,22 @@
-extends layout
-
-block content
-  .w3-card-4
-    header.w3-container.w3-khaki
-      h1 Login
-    p(style="text-align:center;") This is the login page
+doctype html
+html(lang="en")
+  head
+    title Login Collegify
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    link(rel='stylesheet', href='stylesheets/loginstyle.css')
+  body
+    #main
+     form(action="#")
+       div.label login to collegify
+       div.username
+        input(type="text" placeholder="Username")
+       div.password
+        input(type="password" placeholder="Password")
+       button(type="button") Login
+       button(type="button") Reset password
+       p
+        | not a member?
+        a(href="/signup") Sign Up now
+       p
+        a(href="/") Back to Homepage
