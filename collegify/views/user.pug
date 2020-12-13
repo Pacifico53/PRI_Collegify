@@ -14,12 +14,21 @@ block content
         p Erro: User not found...
     div(class="w3-container w3-khaki")
       form(method='POST' action=`/users/update/${infouser._id}`)
-        input(name="username" type="text" placeholder=`Username: ${infouser.username}`)
-        input(name="email" type="text" placeholder=`Email: ${infouser.email}`)
-        input(class="w3-btn" type='submit' value='Edit')
+        p
+          |Edit Info
+        div
+          input(name="name" type="text" placeholder=`New name`)
+        div
+          input(name="username" type="text" placeholder=`New username`)
+        div 
+          input(name="email" type="text" placeholder=`New email`)
+        div 
+          input(name="password" type="text" placeholder=`New password`)
+        div  
+          input(class="w3-btn" type='submit' value='Edit' style="background-color:  #008CBA;")
       form(method='POST' action=`/users/delete/${infouser._id}`)
-        input(class="w3-btn" type='submit' value='Delete')
-    div(class="w3-container w3-khaki")
+        input(class="w3-btn" type='submit' value='Delete' style="background-color:  #FF0000;")
+    div(class="w3-container w3-sand")
       p
         a(href='/') Back to homepage.
       p

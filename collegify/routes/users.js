@@ -39,18 +39,6 @@ router.post("/delete/:idUser", function (req, res) {
         }))
 })
 
-//GET user page
-router.get('/:idUser', (req, res) => {
-    var idUser = req.params.idUser
-    User.consultar(idUser)
-        .then(dados => res.render('user', {
-            infouser: dados
-        }))
-        .catch(e => res.render('error', {
-            error: e
-        }))
-})
-
 // POST Update user
 router.post('/update/:idUser', (req, res) => {
     var idUser = req.params.idUser
@@ -59,6 +47,18 @@ router.post('/update/:idUser', (req, res) => {
         .then(() => {
             res.render('userUpdate')
         })
+        .catch(e => res.render('error', {
+            error: e
+        }))
+})
+
+//GET user page
+router.get('/:idUser', (req, res) => {
+    var idUser = req.params.idUser
+    User.consultar(idUser)
+        .then(dados => res.render('user', {
+            infouser: dados
+        }))
         .catch(e => res.render('error', {
             error: e
         }))
