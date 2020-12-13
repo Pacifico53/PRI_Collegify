@@ -13,10 +13,13 @@ block content
       div(class="w3-container")
         p Erro: User not found...
     div(class="w3-container w3-khaki")
+      form(method='POST' action=`/users/update/${infouser._id}`)
+        input(name="username" type="text" placeholder=`Username: ${infouser.username}`)
+        input(name="email" type="text" placeholder=`Email: ${infouser.email}`)
+        input(class="w3-btn" type='submit' value='Edit')
       form(method='POST' action=`/users/delete/${infouser._id}`)
-        input(type='submit' value='Delete')
-      form(method='GET' action=`/users/update/${infouser._id}`)
-        input(type='submit' value='Edit')
+        input(class="w3-btn" type='submit' value='Delete')
+    div(class="w3-container w3-khaki")
       p
         a(href='/') Back to homepage.
       p
