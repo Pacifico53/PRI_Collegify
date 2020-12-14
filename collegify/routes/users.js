@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const User = require('../controllers/user');
 
-/* GET users listing. */
+// GET users listing.
 router.get('/', function (req, res, next) {
     User.listar()
         .then(dados => res.render('users', {
@@ -13,7 +13,7 @@ router.get('/', function (req, res, next) {
         }))
 });
 
-//POST regista novo user
+// POST regista novo user
 router.post('/signup', (req, res) => {
     var user = {
         name: req.body.name,
@@ -28,7 +28,7 @@ router.post('/signup', (req, res) => {
         }))
 })
 
-// DELETE user using POST
+// POST delete user
 router.post("/delete/:idUser", function (req, res) {
     User.eliminar(req.params.idUser)
         .then(() => {
@@ -39,7 +39,7 @@ router.post("/delete/:idUser", function (req, res) {
         }))
 })
 
-// POST Update user
+// POST update user
 router.post('/update/:idUser', (req, res) => {
     var idUser = req.params.idUser
     var user = req.body
