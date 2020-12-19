@@ -16,4 +16,17 @@ router.get('/signup', function (req, res, next) {
   res.render('signup');
 });
 
+router.get('/protegida', verificaAutenticacao, function (req, res) {
+  res.render('deleted')
+})
+
+function verificaAutenticacao(req, res, next) {
+  if (req.isAuthenticated()) {
+    //req.isAuthenticated() will return true if user is logged in
+    next();
+  } else {
+    res.redirect("/login");
+  }
+}
+
 module.exports = router;

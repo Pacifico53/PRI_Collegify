@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var passport = require('passport')
+
 const User = require('../controllers/user');
 
 // GET users listing.
@@ -12,6 +14,21 @@ router.get('/', function (req, res, next) {
             error: e
         }))
 });
+
+router.get('/logout', function (req, res) {
+    req.logout();
+    req.session.destroy(function (err) {
+        if (!err) {
+            res.redirect('/');
+        } else {
+            console.log('Destroy session error: ', err)
+        }
+    });
+});
+
+router.post('/login', passport.authenticate('local'), function (req, res) {
+    res.redirect('/protegida')
+})
 
 // POST regista novo user
 router.post('/signup', (req, res) => {

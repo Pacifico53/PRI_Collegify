@@ -7,13 +7,13 @@ html(lang="en")
     link(rel='stylesheet', href='stylesheets/loginstyle.css')
   body
     #main
-      form(action="#")
+      form(action="/users/login" method="POST")
         div.label login to collegify
         div.username
-          input(type="text" placeholder="Username")
+          input(type="text" placeholder="Username" name="username")
         div.password
-          input(type="password" placeholder="Password")
-        button(type="button" name="loginbutton") Login
+          input(type="password" placeholder="Password" name="password")
+        button(type="submit" name="loginbutton") Login
         button(type="button" name="resetbutton") Reset password
         p
           | not a member?

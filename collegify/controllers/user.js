@@ -15,6 +15,15 @@ module.exports.consultar = id => {
         .exec()
 }
 
+module.exports.lookUpUsername = uname => {
+    return User
+        .findOne({
+            username: uname
+        })
+        .exec()
+}
+
+
 module.exports.inserir = u => {
     var novo = new User(u)
     return novo.save()
