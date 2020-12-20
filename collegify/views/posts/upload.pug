@@ -1,0 +1,24 @@
+doctype html
+html(lang="en")
+  head
+    title Upload post
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    link(rel='stylesheet', href='../stylesheets/loginstyle.css')
+  body
+    #main
+      form(action="/posts/files" method="POST" enctype="multipart/form-data")
+        div.label Upload post to collegify
+        div.username
+          input(name="title" type="text" placeholder="Title")
+        div.username
+          input(name="description" type="text" placeholder="Description")
+        div.username
+          input(name="username" type="text" placeholder="Username")
+        input(class="w3-input w3-border w3-light-grey" type="file" name="myFile")
+        input(type="submit" value="Upload")
+        p
+          | already a member?
+          a(href="/login") Login now
+        p
+          a(href="/") Back to Homepage
