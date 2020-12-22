@@ -108,3 +108,7 @@ sessions/
 uploads/
 
 collegify/public/postStore/*
+
+collegify/sessions/*
+
+collegify/public/postStore/*
