@@ -9,7 +9,7 @@ var multer = require('multer')
 var upload = multer({ dest: 'uploads/' })
 
 /* GET posts page. */
-router.get('/', function (req, res, next) {
+router.get('/', verificaAutenticacao, function (req, res, next) {
     Post.listar()
         .then(dados => res.render('posts', {
             lista: dados
@@ -68,5 +68,13 @@ router.post('/files', upload.single('myFile'), function (req, res) {
     })
 })
 
+function verificaAutenticacao(req, res, next) {
+    if (req.isAuthenticated()) {
+        //req.isAuthenticated() will return true if user is logged in
+        next();
+    } else {
+        res.redirect("/login");
+    }
+}
 
 module.exports = router;

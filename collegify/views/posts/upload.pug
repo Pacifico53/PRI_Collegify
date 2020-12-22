@@ -8,7 +8,7 @@ html(lang="en")
   body
     #main
       form(action="/posts/files" method="POST" enctype="multipart/form-data")
-        div.label Upload post to collegify
+        div.label Upload conteúdo
         div.username
           input(name="title" type="text" placeholder="Title")
         div.username
@@ -18,7 +18,4 @@ html(lang="en")
         input(class="w3-input w3-border w3-light-grey" type="file" name="myFile")
         input(type="submit" value="Upload")
         p
-          | already a member?
-          a(href="/login") Login now
-        p
-          a(href="/") Back to Homepage
+          a(href="/") Voltar para Homepage

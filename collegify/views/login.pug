@@ -8,7 +8,7 @@ html(lang="en")
   body
     #main
       form(action="/users/login" method="POST")
-        div.label login to collegify
+        div.label login collegify
         div.username
           input(type="text" placeholder="Username" name="username")
         div.password
@@ -16,7 +16,7 @@ html(lang="en")
         button(type="submit" name="loginbutton") Login
         button(type="button" name="resetbutton") Reset password
         p
-          | not a member?
-          a(href="/signup") Sign Up now
+          | Ainda não tens conta?
+          a(href="/signup") Regista-te agora
         p
-          a(href="/") Back to Homepage
+          a(href="/") Voltar para Homepage

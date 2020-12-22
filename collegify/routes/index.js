@@ -3,7 +3,11 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.render('index', { title: 'Collegify' });
+  if (req.isAuthenticated()) {
+    res.redirect('/main');
+  } else {
+    res.render('index', { title: 'Collegify' });
+  }
 });
 
 /* GET login page. */
@@ -16,9 +20,13 @@ router.get('/signup', function (req, res, next) {
   res.render('signup');
 });
 
-router.get('/protegida', verificaAutenticacao, function (req, res) {
-  res.redirect('/users')
-})
+/* GET main page. */
+router.get('/main', verificaAutenticacao, function (req, res, next) {
+  res.render('main', {
+    username: req.user.name
+  })
+  res.render('main');
+});
 
 function verificaAutenticacao(req, res, next) {
   if (req.isAuthenticated()) {

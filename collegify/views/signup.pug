@@ -8,18 +8,20 @@ html(lang="en")
   body
     #main
       form(action="/users/signup" method="POST")
-        div.label sign up to collegify
+        div.label Registar User
         div.username
-          input(name="name" type="text" placeholder="Name")
+          input(name="name" type="text" placeholder="Nome")
         div.username
           input(name="email" type="text" placeholder="Email")
         div.username
           input(name="username" type="text" placeholder="Username")
+        div.username
+          input(name="curso" type="text" placeholder="Curso")
         div.password
           input(name="password" type="password" placeholder="Password")
         button(type="submit") Sign Up
         p
-          | already a member?
-          a(href="/login") Login now
+          | Já estás inscrito?
+          a(href="/login") Login
         p
-          a(href="/") Back to Homepage
+          a(href="/") Voltar a homepage
