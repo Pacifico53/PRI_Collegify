@@ -8,21 +8,29 @@ block content
       .w3-container
         table(class="w3-table-all")
           tr
+            th Type
             th Title
+            th Subtitle
             th Path
             th Uploader
             th Description
-            th Date
+            th Date Creation
+            th Date Register
+            th Visibility
             th Comments
             th Tags
             th Meta
           each a in lista
             tr
+              td= a.type
               td= a.title
+              td= a.subtitle
               td= a.path
               td= a.uploader
               td= a.description
-              td= a.date
+              td= a.dateCreation
+              td= a.dateRegister
+              td= a.visibility
               td= a.comments
               td= a.tags
               td= a.meta
@@ -31,7 +39,7 @@ block content
         p There are no posts...
     div(class="w3-container w3-khaki")
       p
-        a(href='/signup') Register new.
+        a(href='/posts/upload') Register new post.
     div(class="w3-container w3-khaki")
       p
         a(href='/') Back to homepage.

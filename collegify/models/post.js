@@ -7,7 +7,7 @@ var Schema = new mongoose.Schema({
   path: String,
   uploader: String,
   description: String,
-  dateCreation: Date,
+  dateCreation: { type: Date, default: Date.now },
   dateRegister: { type: Date, default: Date.now },
   visibility: String,
   comments: [{ body: String, date: Date }],

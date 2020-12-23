@@ -77,7 +77,8 @@ app.use(session({
   store: new FileStore(),
   secret: 'O meu segredo',
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  name: 'cookie'
 }))
 
 // view engine setup

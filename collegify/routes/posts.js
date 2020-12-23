@@ -11,7 +11,7 @@ var upload = multer({ dest: 'uploads/' })
 /* GET posts page. */
 router.get('/', verificaAutenticacao, function (req, res, next) {
     Post.listar()
-        .then(dados => res.render('posts', {
+        .then(dados => res.render('posts/posts', {
             lista: dados
         }))
         .catch(e => res.render('error', {
@@ -19,29 +19,13 @@ router.get('/', verificaAutenticacao, function (req, res, next) {
         }))
 });
 
-// POST regista novo post
-router.post('/upload', (req, res) => {
-    var post = {
-        title: req.body.title,
-        path: req.body.path,
-        uploader: req.body.uploader,
-        description: req.body.description,
-        tags: req.body.tags
-    }
-    Post.inserir(post)
-        .then(() => res.redirect('/posts'))
-        .catch(e => res.render('error', {
-            error: e
-        }))
-})
-
-// POST regista novo post
-router.get('/upload', (req, res) => {
+// GET pagina upload
+router.get('/upload', verificaAutenticacao, (req, res) => {
     res.render('posts/upload')
 })
 
-router.post('/files', upload.single('myFile'), function (req, res) {
-    console.log(JSON.stringify(req.file));
+//POST upload file
+router.post('/upload', upload.single('myFile'), function (req, res) {
     let quarantinePath = __dirname + '/../' + req.file.path
     let newPath = __dirname + '/../public/postStore/' + req.file.originalname
 
@@ -55,7 +39,7 @@ router.post('/files', upload.single('myFile'), function (req, res) {
             var post = {
                 title: req.body.title,
                 path: newPath,
-                uploader: req.body.uploader,
+                uploader: req.user.username,
                 description: req.body.description,
             }
 

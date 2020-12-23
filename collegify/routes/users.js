@@ -19,6 +19,7 @@ router.get('/logout', function (req, res) {
     req.logout();
     req.session.destroy(function (err) {
         if (!err) {
+            res.clearCookie('cookie');
             res.redirect('/');
         } else {
             console.log('Destroy session error: ', err)
