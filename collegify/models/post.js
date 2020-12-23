@@ -18,4 +18,5 @@ var Schema = new mongoose.Schema({
   }
 });
 
+//METER LISTA DE USERS QUE DERAM LIKE
 module.exports = mongoose.model('Post', Schema, 'posts')

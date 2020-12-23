@@ -25,7 +25,6 @@ router.get('/main', verificaAutenticacao, function (req, res, next) {
   res.render('main', {
     username: req.user.name
   })
-  res.render('main');
 });
 
 function verificaAutenticacao(req, res, next) {
