@@ -8,7 +8,7 @@ const Post = require('../controllers/post');
 var multer = require('multer')
 var upload = multer({ dest: 'uploads/' })
 
-/* GET posts page. */
+// GET posts page.
 router.get('/', verificaAutenticacao, function (req, res, next) {
     Post.listar()
         .then(dados => res.render('posts/posts', {
@@ -24,7 +24,7 @@ router.get('/upload', verificaAutenticacao, (req, res) => {
     res.render('posts/upload')
 })
 
-//POST upload file
+// POST upload file
 router.post('/upload', upload.single('myFile'), function (req, res) {
     let quarantinePath = __dirname + '/../' + req.file.path
     let newPath = __dirname + '/../public/postStore/' + req.file.originalname
@@ -36,11 +36,15 @@ router.post('/upload', upload.single('myFile'), function (req, res) {
             res.end()
         }
         else {
+            // Falta meter o owner do post
             var post = {
+                type: req.body.type,
+                subtitle: req.body.subtitle, // Opcional
                 title: req.body.title,
                 path: newPath,
                 uploader: req.user.username,
                 description: req.body.description,
+                visibility: req.body.visibility
             }
 
             Post.inserir(post)
