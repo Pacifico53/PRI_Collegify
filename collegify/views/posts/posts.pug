@@ -22,7 +22,8 @@ block content
           each a in lista
             tr
               td= a.type
-              td= a.title
+              td
+                a(href='/posts/'+a._id) #{a.title}
               td= a.subtitle
               td= a.uploader
               td= a.description

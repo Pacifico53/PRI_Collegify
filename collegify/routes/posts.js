@@ -19,24 +19,35 @@ router.get('/', verificaAutenticacao, function (req, res, next) {
         }))
 });
 
-// GET pagina upload
+// GET post page.
+router.get('/:idPost', verificaAutenticacao, (req, res) => {
+    var post = req.params.idPost
+    Post.consultar(post)
+        .then(dados => res.render('posts/post', {
+            post: dados
+        }))
+        .catch(e => res.render('error', {
+            error: e
+        }))
+});
+
+// GET upload page
 router.get('/upload', verificaAutenticacao, (req, res) => {
     res.render('posts/upload')
 })
 
 // POST upload file
-router.post('/upload', upload.single('myFile'), function (req, res) {
+router.post('/upload', upload.single('myFile'), (req, res) => {
     let quarantinePath = __dirname + '/../' + req.file.path
     let newPath = __dirname + '/../public/postStore/' + req.file.originalname
 
-    fs.rename(quarantinePath, newPath, function (error) {
+    fs.rename(quarantinePath, newPath, (error) => {
         if (error) {
             res.writeHead(200, { 'Content-Type': 'text/html;charset=utf-8' })
             res.write('<p>Erro: ao mover o ficheiro da quarentena.' + error + '</p>')
             res.end()
         }
         else {
-            // Falta meter o owner do post
             var post = {
                 type: req.body.type,
                 subtitle: req.body.subtitle, // Opcional

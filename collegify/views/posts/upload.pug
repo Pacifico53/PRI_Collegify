@@ -15,10 +15,20 @@ html(lang="en")
           input(name="subtitle" type="text" placeholder="Subtitle")
         div.username
           input(name="description" type="text" placeholder="Description")
-        div.username
-          input(name="tipo" type="text" placeholder="Type*")
-        div.username
-          input(name="visibility" type="text" placeholder="Visibility*")
+        div
+          select(name="type").w3-input.w3-border
+            option(value="Relatório" selected) Relatório
+            option(value="Tpc") Tpc
+            option(value="Artigo") Artigo
+            option(value="Tese") Tese
+            option(value="Aplicação") Aplicação
+            option(value="Slides") Slides
+            option(value="Teste") Teste
+        div
+          label Privado
+            input(name="visibility" type="radio" value="Privado") 
+          label Público
+            input(name="visibility" type="radio" value="Público") 
         div.username
           input(name="tags" type="text" placeholder="Tags")
         input(class="w3-input w3-border w3-light-grey" type="file" name="myFile")
