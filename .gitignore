@@ -106,4 +106,4 @@ dist
 #OTHER
 sessions/
 uploads/
-postStore/
+collegify/public/postStore/*
