@@ -19,18 +19,6 @@ router.get('/', verificaAutenticacao, function (req, res, next) {
         }))
 });
 
-// GET post page.
-router.get('/:idPost', verificaAutenticacao, (req, res) => {
-    var post = req.params.idPost
-    Post.consultar(post)
-        .then(dados => res.render('posts/post', {
-            post: dados
-        }))
-        .catch(e => res.render('error', {
-            error: e
-        }))
-});
-
 // GET upload page
 router.get('/upload', verificaAutenticacao, (req, res) => {
     res.render('posts/upload')
@@ -66,6 +54,19 @@ router.post('/upload', upload.single('myFile'), (req, res) => {
         }
     })
 })
+
+// GET post page.
+router.get('/:idPost', verificaAutenticacao, (req, res) => {
+    var post = req.params.idPost
+    Post.consultar(post)
+        .then(dados => res.render('posts/post', {
+            post: dados
+        }))
+        .catch(e => res.render('error', {
+            error: e
+        }))
+});
+
 
 function verificaAutenticacao(req, res, next) {
     if (req.isAuthenticated()) {
