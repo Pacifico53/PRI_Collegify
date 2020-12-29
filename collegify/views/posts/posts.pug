@@ -19,6 +19,7 @@ block content
             th Comments
             th Tags
             th Meta
+            th Path
           each a in lista
             tr
               td= a.type
@@ -33,6 +34,7 @@ block content
               td= a.comments
               td= a.tags
               td= a.meta
+              td= a.path
     else
       div(class="w3-container")
         p There are no posts...
