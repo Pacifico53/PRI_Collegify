@@ -10,76 +10,76 @@ var upload = multer({ dest: 'uploads/' })
 
 // GET posts page.
 router.get('/', verificaAutenticacao, function (req, res, next) {
-    Post.listar()
-        .then(dados => res.render('posts/posts', {
-            lista: dados
-        }))
-        .catch(e => res.render('error', {
-            error: e
-        }))
+  Post.listar()
+    .then(dados => res.render('posts/posts', {
+      lista: dados
+    }))
+    .catch(e => res.render('error', {
+      error: e
+    }))
 });
 
 // GET upload page
 router.get('/upload', verificaAutenticacao, (req, res) => {
-    res.render('posts/upload')
+  res.render('posts/upload')
 })
 
 // POST upload file
 router.post('/upload', upload.single('myFile'), (req, res) => {
-    let quarantinePath = __dirname + '/../' + req.file.path
-    let newPath = __dirname + '/../public/postStore/' + req.file.originalname
+  let quarantinePath = __dirname + '/../' + req.file.path
+  let newPath = __dirname + '/../public/postStore/' + req.file.originalname
 
-    fs.rename(quarantinePath, newPath, (error) => {
-        if (error) {
-            res.writeHead(200, { 'Content-Type': 'text/html;charset=utf-8' })
-            res.write('<p>Erro: ao mover o ficheiro da quarentena.' + error + '</p>')
-            res.end()
+  fs.rename(quarantinePath, newPath, (error) => {
+    if (error) {
+      res.writeHead(200, { 'Content-Type': 'text/html;charset=utf-8' })
+      res.write('<p>Erro: ao mover o ficheiro da quarentena.' + error + '</p>')
+      res.end()
+    }
+    else {
+      var post = {
+        type: req.body.type,
+        title: req.body.title,
+        subtitle: req.body.subtitle, // Opcional
+        path: newPath,
+        uploader: req.user.username,
+        description: req.body.description,
+        visibility: req.body.visibility,
+        tags: req.body.tags.split(" "),
+        meta: {
+          curso: req.body.curso,
+          ano: req.body.ano,
+          semestre: req.body.semestre
         }
-        else {
-            var post = {
-                type: req.body.type,
-                title: req.body.title,
-                subtitle: req.body.subtitle, // Opcional
-                path: newPath,
-                uploader: req.user.username,
-                description: req.body.description,
-                visibility: req.body.visibility,
-                meta: {
-                    curso: req.body.curso,
-                    ano: req.body.ano,
-                    semestre: req.body.semestre
-                }
-            }
+      }
 
-            Post.inserir(post)
-                .then(() => res.redirect('/posts'))
-                .catch(e => res.render('error', {
-                    error: e
-                }))
-        }
-    })
+      Post.inserir(post)
+        .then(() => res.redirect('/posts'))
+        .catch(e => res.render('error', {
+          error: e
+        }))
+    }
+  })
 })
 
 // GET post page.
 router.get('/:idPost', verificaAutenticacao, (req, res) => {
-    var post = req.params.idPost
-    Post.consultar(post)
-        .then(dados => res.render('posts/post', {
-            post: dados
-        }))
-        .catch(e => res.render('error', {
-            error: e
-        }))
+  var post = req.params.idPost
+  Post.consultar(post)
+    .then(dados => res.render('posts/post', {
+      post: dados
+    }))
+    .catch(e => res.render('error', {
+      error: e
+    }))
 });
 
-
 function verificaAutenticacao(req, res, next) {
-    if (req.isAuthenticated()) {
-        //req.isAuthenticated() will return true if user is logged in
-        next();
-    } else {
-        res.redirect("/login");
-    }
+  if (req.isAuthenticated()) {
+    //req.isAuthenticated() will return true if user is logged in
+    next();
+  } else {
+    res.redirect("/login");
+  }
 }
 
 module.exports = router;
