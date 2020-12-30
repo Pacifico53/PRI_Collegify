@@ -15,6 +15,12 @@ html(lang="en")
           input(name="subtitle" type="text" placeholder="Subtitle")
         div.username
           input(name="description" type="text" placeholder="Description")
+        div.username
+          input(name="curso" type="text" placeholder="Curso")
+        div.username
+          input(name="ano" type="text" placeholder="Ano")
+        div.username
+          input(name="semestre" type="text" placeholder="Semestre")          
         div
           select(name="type").w3-input.w3-border
             option(value="Relatório" selected) Relatório
@@ -26,7 +32,7 @@ html(lang="en")
             option(value="Teste") Teste
         div
           label Privado
-            input(name="visibility" type="radio" value="Privado") 
+            input(name="visibility" type="radio" value="Privado" checked) 
           label Público
             input(name="visibility" type="radio" value="Público") 
         div.username

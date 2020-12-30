@@ -2,15 +2,15 @@ var mongoose = require('mongoose')
 var Schema = mongoose.Schema
 
 var CommentSchema = new Schema({
-    body: String, 
+    body: String,
     user: String,
     likes: { type: Number, default: 0 },
-    date: Date 
+    date: Date
 })
 
 var PostSchema = new Schema({
-    type: { type: String, required: true},
-    title: { type: String, required: true},
+    type: { type: String, required: true },
+    title: { type: String, required: true },
     subtitle: String,
     path: String,
     uploader: String,
@@ -21,8 +21,11 @@ var PostSchema = new Schema({
     comments: [CommentSchema],
     tags: [String],
     meta: {
+        curso: String,
+        ano: String,
+        semestre: String,
         votes: { type: Number, default: 0 },
-        favs: { type: Number, default: 0 },
+        favs: [String], //nomes de users que deram fav
     }
 });
 

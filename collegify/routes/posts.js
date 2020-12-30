@@ -38,12 +38,17 @@ router.post('/upload', upload.single('myFile'), (req, res) => {
         else {
             var post = {
                 type: req.body.type,
-                subtitle: req.body.subtitle, // Opcional
                 title: req.body.title,
+                subtitle: req.body.subtitle, // Opcional
                 path: newPath,
                 uploader: req.user.username,
                 description: req.body.description,
-                visibility: req.body.visibility
+                visibility: req.body.visibility,
+                meta: {
+                    curso: req.body.curso,
+                    ano: req.body.ano,
+                    semestre: req.body.semestre
+                }
             }
 
             Post.inserir(post)
