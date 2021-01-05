@@ -3,23 +3,23 @@ extends layout
 block content
   .w3-card-4
     header.w3-container.w3-khaki
-      h3 Lista de Anos
+      h3 Lista de Semestres
     if lista.length > 0
       .w3-container
       - var values = [];
       each val in lista
         -
-          if(!values.includes(val.meta.ano) && val.meta.ano){
-            values.push(val.meta.ano)
+          if(!values.includes(val.meta.semestre) && val.meta.semestre){
+            values.push(val.meta.semestre)
           }
       - values.sort();
       ul
         each val in values
           li
-            a(href= path + '/ano/' + val) #{val}
+            a(href=path + '/semestre/' + val) #{val}
     else
       div(class="w3-container")
-        p Ainda não há anos...
+        p Ainda não há semestres...
     div(class="w3-container w3-khaki")
       p
         a(href='/posts/upload') Criar novo post.

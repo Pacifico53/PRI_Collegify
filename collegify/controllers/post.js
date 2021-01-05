@@ -55,3 +55,24 @@ module.exports.listarDeCurso = idCurso => {
     })
     .exec()
 }
+
+// Devolve uma lista de Posts de curso de dado ano
+module.exports.listarDeCursoAno = (idCurso, ano) => {
+  return Post
+    .find({
+      'meta.curso': idCurso,
+      'meta.ano': ano
+    })
+    .exec()
+}
+
+// Devolve uma lista de Posts de curso de dado ano e semestre
+module.exports.listarDeCursoAnoSemestre = (idCurso, ano, sem) => {
+  return Post
+    .find({
+      'meta.curso': idCurso,
+      'meta.ano': ano,
+      'meta.semestre': sem
+    })
+    .exec()
+}
