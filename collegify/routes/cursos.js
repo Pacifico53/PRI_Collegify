@@ -7,7 +7,7 @@ const Post = require('../controllers/post');
 router.get('/', verificaAutenticacao, function (req, res, next) {
   Post.listar()
     .then(dados => res.render('cursos/cursos', {
-      lista: dados,
+      lista: dados
     }))
     .catch(e => res.render('error', {
       error: e
