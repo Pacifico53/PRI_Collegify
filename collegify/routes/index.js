@@ -14,7 +14,7 @@ router.get('/', function (req, res, next) {
 
 /* GET login page. */
 router.get('/login', function (req, res, next) {
-  res.render('login');
+  res.render('login', { title: 'Collegify' });
 });
 
 /* GET signup page. */

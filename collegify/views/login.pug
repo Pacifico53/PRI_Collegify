@@ -1,22 +1,21 @@
-doctype html
-html(lang="en")
-  head
-    title Login Collegify
-    meta(charset='UTF-8')
-    meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    link(rel='stylesheet', href='stylesheets/loginstyle.css')
-  body
-    #main
-      form(action="/users/login" method="POST")
-        div.label login collegify
-        div.username
-          input(type="text" placeholder="Username" name="username")
-        div.password
-          input(type="password" placeholder="Password" name="password")
-        button(type="submit" name="loginbutton") Login
-        button(type="button" name="resetbutton") Reset password
-        p
-          | Ainda não tens conta?
-          a(href="/signup") Regista-te agora
-        p
-          a(href="/") Voltar para Homepage
+extends layout
+
+block content
+  .w3-container.w3-deep-orange
+    h1.w3-bold Login
+  .w3-container.w3-sand.w3-margin.w3-border.w3-center
+    form.w3-container(action="/users/login" method="POST")
+      p
+      label.w3-bold Username
+      input.w3-input.w3-border(name="name" type="text")
+      p      
+      label.w3-bold Password
+      input.w3-input.w3-border(name="password" type="password")
+      p
+      button.w3-deep-orange(type="submit" name="loginbutton") Login
+      button.w3-deep-orange(type="button" name="resetbutton") Reset password
+  .w3-container.w3-deep-orange.w3-center
+    p
+    a.w3-margin(href="/login") Login
+    a.w3-margin(href="/") Voltar a homepage
+    p
