@@ -6,20 +6,20 @@ block content
       h3 Lista de Posts
     if lista.length > 0
       .w3-container
-        table(class="w3-table-all")
+        table#myTable(class="w3-table-all")
           tr
-            th Type
-            th Title
-            th Subtitle
-            th Uploader
-            th Description
-            th Date Creation
-            th Date Register
-            th Visibility
-            th Comments
-            th Tags
-            th Meta
-            th Path
+            th(onclick="sortTable(0)") Type
+            th(onclick="sortTable(1)") Title
+            th(onclick="sortTable(2)") Subtitle
+            th(onclick="sortTable(3)") Uploader
+            th(onclick="sortTable(4)") Description
+            th(onclick="sortTable(5)") Date Creation
+            th(onclick="sortTable(6)") Date Register
+            th(onclick="sortTable(7)") Visibility
+            th(onclick="sortTable(8)") Comments
+            th(onclick="sortTable(9)") Tags
+            th(onclick="sortTable(10)") Meta
+            th(onclick="sortTable(11)") Path
           each a in lista
             tr
               td= a.type
