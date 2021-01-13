@@ -7,15 +7,17 @@ block content
     form.w3-container(action="/users/login" method="POST")
       p
       label.w3-bold Username
-      input.w3-input.w3-border(name="name" type="text")
+      input.w3-input.w3-border(name="username" type="text" placeholder="Username")
       p      
       label.w3-bold Password
-      input.w3-input.w3-border(name="password" type="password")
+      input.w3-input.w3-border(name="password" type="password" placeholder="Password")
       p
       button.w3-deep-orange(type="submit" name="loginbutton") Login
       button.w3-deep-orange(type="button" name="resetbutton") Reset password
   .w3-container.w3-deep-orange.w3-center
     p
     a.w3-margin(href="/login") Login
-    a.w3-margin(href="/") Voltar a homepage
     p
+    a.w3-margin(href="/signup") Registar nova conta
+    p
+    a.w3-margin(href="/") Voltar a homepage

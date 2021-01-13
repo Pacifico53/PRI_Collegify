@@ -4,6 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+const favicon = require('express-favicon');
+
 var User = require('./controllers/user')
 
 var mongoose = require('mongoose');
@@ -63,12 +65,10 @@ passport.deserializeUser((uid, done) => {
     .catch(erro => done(erro, false))
 })
 
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var postsRouter = require('./routes/posts');
 var cursosRouter = require('./routes/cursos');
-
 
 var app = express();
 
@@ -87,11 +87,13 @@ app.use(session({
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(favicon(__dirname + '/public/favicon.ico'));
 
 app.use(passport.initialize());
 app.use(passport.session());
