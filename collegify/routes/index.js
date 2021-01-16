@@ -14,7 +14,7 @@ router.get('/', function (req, res, next) {
 
 /* GET login page. */
 router.get('/login', function (req, res, next) {
-  res.render('login', { title: 'Collegify' });
+  res.render('login', { title: 'Login' });
 });
 
 /* GET signup page. */
@@ -25,6 +25,7 @@ router.get('/signup', function (req, res, next) {
 /* GET main page. */
 router.get('/main', verificaAutenticacao, function (req, res, next) {
   res.render('main', {
+    title: 'Collegify',
     username: req.user.name
   })
 });
