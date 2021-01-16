@@ -7,9 +7,33 @@ block content
     h2 #{post.title}
     h3 #{post.subtitle}
     p #{post.description}
+    p
+      | #{post.meta.favs.length} Favs
+      span(style="display:block;float:right;width:50%;margin-left:10px;") #{post.meta.votes} Likes
+    form(action="/posts/fav/" + post._id method="POST")
+      p
+      button.w3-deep-orange(type="submit" name="favorite") Adicionar aos Favoritos
+      p
     p #{post.dateRegister}
     p
       a(href='/posts/download/' + post.filename) DOWNLOAD
   .w3-container.w3-khaki
     h3 Comentarios
-  
+    .w3-container.w3-sand
+      form.w3-container(action="/posts/comment/" + post._id method="POST")
+        p
+        textarea.w3-input.w3-border(style="resize: vertical;" name="comment" type="text" placeholder="Escreve aqui o teu comentário")
+        p
+        button.w3-deep-orange(type="submit" name="commentbutton") Submeter
+        p
+      if post.comments.length == 0
+        p Be the first to comment!
+      else
+        each c in post.comments
+          .w3-container.w3-border.w3-khaki
+            h4= c.user
+            .w3-container.w3-border.w3-sand
+              p(style="font-size=80%")=c.body
+            p(style="font-size=80%") #{c.likes} Likes
+              button.w3-orange(type="submit" name="like") +1
+            p(style="font-size=80%")= c.date

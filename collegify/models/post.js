@@ -5,7 +5,7 @@ var CommentSchema = new Schema({
     body: String,
     user: String,
     likes: { type: Number, default: 0 },
-    date: Date
+    date: { type: Date, default: Date.now }
 })
 
 var PostSchema = new Schema({

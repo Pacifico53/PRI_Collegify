@@ -68,6 +68,20 @@ router.get('/download/:filename', function (req, res) {
   res.download(__dirname + '/../public/postStore/' + req.params.filename)
 })
 
+router.post('/comment/:idPost', function (req, res) {
+  var comment = {
+    body: req.body.comment,
+    user: req.user.username,
+  }
+  Post.addComment(req.params.idPost, comment);
+  res.redirect('back');
+})
+
+router.post('/fav/:idPost', function (req, res) {
+  Post.addFavourite(req.params.idPost, req.user.username);
+  res.redirect('back');
+})
+
 
 // GET post page.
 router.get('/:idPost', verificaAutenticacao, (req, res) => {

@@ -76,3 +76,22 @@ module.exports.listarDeCursoAnoSemestre = (idCurso, ano, sem) => {
     })
     .exec()
 }
+
+module.exports.addComment = (idPost, comment) => {
+  this.consultar(idPost)
+    .then(dados => {
+      dados.comments.push(comment)
+      dados.save()
+    })
+}
+
+module.exports.addFavourite = (idPost, username) => {
+  this.consultar(idPost)
+    .then(dados => {
+      const listfavs = dados.meta.favs
+      if (!listfavs.contains(username)) {
+        dados.meta.favs.push(username)
+      }
+      dados.save()
+    })
+}
