@@ -106,4 +106,5 @@ dist
 #OTHER
 sessions/
 uploads/
-collegify/public/postStore/*
+public/postStore/*
+!public/postStore/placeholder.txt
