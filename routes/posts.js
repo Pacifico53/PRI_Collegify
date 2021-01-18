@@ -12,6 +12,7 @@ var upload = multer({ dest: 'uploads/' })
 router.get('/', verificaAutenticacao, function (req, res, next) {
   Post.listar()
     .then(dados => res.render('posts/posts', {
+      title: 'Lista de Posts',
       lista: dados
     }))
     .catch(e => res.render('error', {
@@ -21,7 +22,9 @@ router.get('/', verificaAutenticacao, function (req, res, next) {
 
 // GET upload page
 router.get('/upload', verificaAutenticacao, (req, res) => {
-  res.render('posts/upload')
+  res.render('posts/upload', {
+    title: 'Upload'
+  })
 })
 
 // POST upload file
@@ -39,8 +42,8 @@ router.post('/upload', upload.single('myFile'), (req, res) => {
       var post = {
         type: req.body.type,
         title: req.body.title,
-        subtitle: req.body.subtitle, // Opcional
-        path: newPath,
+        subtitle: req.body.subtitle,   // Opcional
+        filename: req.file.originalname,
         uploader: req.user.username,
         description: req.body.description,
         visibility: req.body.visibility,
@@ -61,11 +64,34 @@ router.post('/upload', upload.single('myFile'), (req, res) => {
   })
 })
 
+//GET download 
+router.get('/download/:filename', function (req, res) {
+  res.download(__dirname + '/../public/postStore/' + req.params.filename)
+})
+
+//POST comment
+router.post('/comment/:idPost', function (req, res) {
+  var comment = {
+    body: req.body.comment,
+    user: req.user.username,
+  }
+  Post.addComment(req.params.idPost, comment);
+  res.redirect('back');
+})
+
+//POST favorito
+router.post('/fav/:idPost', function (req, res) {
+  Post.addFavourite(req.params.idPost, req.user.username);
+  res.redirect('back');
+})
+
+
 // GET post page.
 router.get('/:idPost', verificaAutenticacao, (req, res) => {
   var post = req.params.idPost
   Post.consultar(post)
     .then(dados => res.render('posts/post', {
+      title: 'Post',
       post: dados
     }))
     .catch(e => res.render('error', {

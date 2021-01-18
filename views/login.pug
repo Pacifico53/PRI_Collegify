@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  .w3-container.w3-deep-orange
+    h1.w3-bold Login
+  .w3-container.w3-sand.w3-margin.w3-border
+    form.w3-container(action="/users/login" method="POST")
+      p
+      .w3-left-align.w3-margin
+        label.w3-bold Username
+      input.w3-input.w3-border(name="username" type="text" placeholder="Username")
+      p   
+      .w3-left-align.w3-margin   
+        label.w3-bold Password
+      input.w3-input.w3-border(name="password" type="password" placeholder="Password")
+      
+      .w3-left-align
+        button.w3-deep-orange.w3-round-xxlarge.w3-margin(type="submit" name="loginbutton") Login
+        button.w3-deep-orange.w3-round-xxlarge.w3-margin(type="button" name="resetbutton") Reset password    
+  .w3-container.w3-deep-orange.w3-center
+    p
+    a.w3-margin(href="/signup") Sign up
+    a.w3-margin(href="/") Voltar a homepage
+    p
