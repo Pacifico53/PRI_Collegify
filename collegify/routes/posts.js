@@ -64,10 +64,12 @@ router.post('/upload', upload.single('myFile'), (req, res) => {
   })
 })
 
+//GET download 
 router.get('/download/:filename', function (req, res) {
   res.download(__dirname + '/../public/postStore/' + req.params.filename)
 })
 
+//POST comment
 router.post('/comment/:idPost', function (req, res) {
   var comment = {
     body: req.body.comment,
@@ -77,6 +79,7 @@ router.post('/comment/:idPost', function (req, res) {
   res.redirect('back');
 })
 
+//POST favorito
 router.post('/fav/:idPost', function (req, res) {
   Post.addFavourite(req.params.idPost, req.user.username);
   res.redirect('back');

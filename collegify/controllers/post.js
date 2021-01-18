@@ -77,6 +77,7 @@ module.exports.listarDeCursoAnoSemestre = (idCurso, ano, sem) => {
     .exec()
 }
 
+// Adiciona um comentário a um post
 module.exports.addComment = (idPost, comment) => {
   this.consultar(idPost)
     .then(dados => {
@@ -85,6 +86,7 @@ module.exports.addComment = (idPost, comment) => {
     })
 }
 
+// Adiciona um favorito
 module.exports.addFavourite = (idPost, username) => {
   this.consultar(idPost)
     .then(dados => {

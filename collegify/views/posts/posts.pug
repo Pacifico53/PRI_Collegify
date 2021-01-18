@@ -19,7 +19,6 @@ block content
             th(onclick="sortTable(8)") Comments
             th(onclick="sortTable(9)") Tags
             th(onclick="sortTable(10)") Meta
-            th(onclick="sortTable(11)") Path
           each a in lista
             tr
               td= a.type
@@ -31,10 +30,9 @@ block content
               td= a.dateCreation
               td= a.dateRegister
               td= a.visibility
-              td= a.comments
+              td= a.comments.length
               td= a.tags
               td= a.meta
-              td= a.path
     else
       div(class="w3-container")
         p There are no posts...
