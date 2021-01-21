@@ -1,13 +1,10 @@
 extends layout
 
 block content
-  .w3-card-4
-    header.w3-container.w3-khaki
-      h1 Collegify
-    p(style="text-align:center;") Bem vindo, #{username}.
-    p(style="text-align:center;")
-      | <a href="/posts"> Lista todos posts</a>
-    p(style="text-align:center;")
-      | <a href="/cursos"> Lista cursos</a>
-    p(style="text-align:center;")
-      | <a href="/users/logout"> Logout</a>
+
+    .w3-container
+        p(style="text-align:center;") Bem vindo, #{username}.
+        p(style="text-align:center;")
+            | <a href="/posts"> Lista todos posts</a>
+        p(style="text-align:center;")
+            | <a href="/cursos"> Lista cursos</a>

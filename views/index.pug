@@ -1,11 +1,15 @@
-extends layout
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/w3.css')
+  body
+    .w3-container.w3-deep-orange
+      h2.w3-left= title
+    .w3-container
+      .w3-center.w3-margin
+        p Welcome to #{title}
+        pround-xxlarge.w3
+        a.w3-btn.w3-deep-orange.w3-round-xxlarge.w3--margin(href="/login") Login
+        divider
+        a.w3-btn.w3-deep-orange.w3-round-xxlarge.w3-margin(href="/signup") Sign up
 
-block content
-  .w3-card-4
-    header.w3-container.w3-khaki
-      h1= title
-    p(style="text-align:center;") Welcome to #{title}
-    p(style="text-align:center;")
-      | <a href="/login"> Login</a>
-      | or 
-      | <a href="/signup"> Sign up</a>

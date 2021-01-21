@@ -1,39 +1,41 @@
-extends layout
-
-block content
-  .w3-container.w3-deep-orange
-    h1.w3-bold Registar
-  .w3-container.w3-sand.w3-margin.w3-border
-    form.w3-container(action="/users/signup" method="POST")
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/w3.css')
+  body
+    .w3-container.w3-deep-orange
+      h2.w3-left= title
+    .w3-container.w3-sand.w3-margin.w3-border
+      form.w3-container(action="/users/signup" method="POST")
+        p
+        label.w3-bold Nome
+        input.w3-input.w3-border(name="name" type="text")
+        p      
+        label.w3-bold Email
+        input.w3-input.w3-border(name="email" type="text")
+        p      
+        label.w3-bold Username
+        input.w3-input.w3-border(name="username" type="text")
+        p      
+        label.w3-bold Password
+        input.w3-input.w3-border(name="password" type="password")
+        p
+        lable Tipo de Utilizador
+        select.w3-input.w3-border(name="level")
+          option(value="produtor" selected) Produtor
+          option(value="consumidor") Consumidor
+        p
+        input.w3-check(name="affiliation" type="checkbox" checked value="docente")
+        lable.w3-margin Docente
+        p
+        label.w3-bold Curso
+          select(name="curso").w3-input.w3-border
+            option(value="MiEI" selected) MiEI
+            option(value="Outro") Outro
+        p
+        button.w3-deep-orange.w3-round-xxlarge(type="submit").w3-margin Sign Up
+    .w3-container.w3-deep-orange.w3-center
       p
-      label.w3-bold Nome
-      input.w3-input.w3-border(name="name" type="text")
-      p      
-      label.w3-bold Email
-      input.w3-input.w3-border(name="email" type="text")
-      p      
-      label.w3-bold Username
-      input.w3-input.w3-border(name="username" type="text")
-      p      
-      label.w3-bold Password
-      input.w3-input.w3-border(name="password" type="password")
+      a.w3-margin(href="/login") Login
+      a.w3-margin(href="/") Voltar a homepage
       p
-      lable Tipo de Utilizador
-      select.w3-input.w3-border(name="level")
-        option(value="produtor" selected) Produtor
-        option(value="consumidor") Consumidor
-      p
-      input.w3-check(name="affiliation" type="checkbox" checked value="docente")
-      lable.w3-margin Docente
-      p
-      label.w3-bold Curso
-        select(name="curso").w3-input.w3-border
-          option(value="MiEI" selected) MiEI
-          option(value="Outro") Outro
-      p
-      button.w3-deep-orange.w3-round-xxlarge(type="submit").w3-margin Sign Up
-  .w3-container.w3-deep-orange.w3-center
-    p
-    a.w3-margin(href="/login") Login
-    a.w3-margin(href="/") Voltar a homepage
-    p

@@ -4,6 +4,10 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/w3.css')
   body
+    .w3-container.w3-deep-orange
+      h2.w3-left= title
+      .w3-btn.w3-black.w3-right.w3-center.w3-round.w3-margin
+          a(href="/users/logout") Logout
     block content
   script.
     function sortTable(n) {
