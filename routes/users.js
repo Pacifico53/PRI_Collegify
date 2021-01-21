@@ -8,6 +8,7 @@ const User = require('../controllers/user');
 router.get('/', function (req, res, next) {
     User.listar()
         .then(dados => res.render('users/users', {
+            title: "Lista de Users",
             lista: dados
         }))
         .catch(e => res.render('error', {
