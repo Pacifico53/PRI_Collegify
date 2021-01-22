@@ -19,21 +19,22 @@ ou
 nodemon
 ```
 
-# Rotas da API
+## Rotas da API
  * GET /
  * GET /login
  * GET /signup
  * GET /main
  * GET /main
- 
+ #### Users
  * GET /users
  * GET /users/logout
+ * POST /users/login
  * POST /users/login
  * POST /users/signup
  * POST /users/delete/:idUser
  * POST /users/update/:idUser
  * GET /users/:idUser
- 
+ #### Posts
  * GET /posts
  * GET /posts
  * GET /posts/upload
@@ -43,11 +44,11 @@ nodemon
  * GET /posts/download/:filename
  * POST /posts/comment/:idPost
  * POST /posts/fav/:idPost
- 
- 
+ * POST /posts/like/:idPost
+ * POST /posts/likeComment/:index/:idPost
  * GET /posts/:idPost
  * GET /posts/:idPost
- 
+ #### Cursos
  * GET /cursos
  * GET /cursos
  * GET /cursos/:idCurso/ano/:ano/semestre/:sem
