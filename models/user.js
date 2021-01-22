@@ -9,7 +9,8 @@ var Schema = new mongoose.Schema({
     dateRegister: { type: Date, default: Date.now },
     dateLast: { type: Date, default: Date.now },
     curso: String,
-    affiliation: String
+    affiliation: String,
+    favPostIds: [String]
 });
 
 module.exports = mongoose.model('User', Schema, 'users')

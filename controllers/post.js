@@ -121,3 +121,10 @@ module.exports.addLikeToComment = (idPost, username, index) => {
       dados.save()
     })
 }
+
+// Search posts
+module.exports.searchFilter = (params) => {
+  return Post
+    .find(params)
+    .exec()
+}
