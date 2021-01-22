@@ -4,4 +4,13 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/w3.css')
   body
+    .w3-container.w3-deep-orange
+      h2.w3-left= title
+      .w3-right
+        a.w3-btn.w3-black.w3-round.w3-margin(href="/users/logout") Logout
     block content
+    block footer
+    .w3-card-4.w3-deep-orange.w3-center
+      a.w3-btn.w3-hover-orange.w3-sand.w3-round-xxlarge.w3-margin(href="/posts/upload") Novo Post
+      a.w3-center.w3-padding Gerado por Collegify :: 2020
+      a.w3-btn.w3-hover-orange.w3-sand.w3-round-xxlarge.w3-margin(href="/") Voltar a homepage

@@ -7,6 +7,7 @@ const Post = require('../controllers/post');
 router.get('/', verificaAutenticacao, function (req, res, next) {
   Post.listar()
     .then(dados => res.render('cursos/cursos', {
+      title: 'Lista de Cursos',
       lista: dados
     }))
     .catch(e => res.render('error', {
@@ -18,6 +19,7 @@ router.get('/', verificaAutenticacao, function (req, res, next) {
 router.get('/:idCurso/ano/:ano/semestre/:sem', verificaAutenticacao, (req, res) => {
   Post.listarDeCursoAnoSemestre(req.params.idCurso, req.params.ano, req.params.sem)
     .then(dados => res.render('cursos/cursoSemestre', {
+      title: 'Posts de ' + req.params.idCurso + ' ' + req.params.ano + 'º ano ' + req.params.sem + 'º semstre',
       lista: dados,
       curso: req.params.idCurso,
       ano: req.params.ano,
@@ -33,6 +35,7 @@ router.get('/:idCurso/ano/:ano/semestre/:sem', verificaAutenticacao, (req, res) 
 router.get('/:idCurso/ano/:ano', verificaAutenticacao, (req, res) => {
   Post.listarDeCursoAno(req.params.idCurso, req.params.ano)
     .then(dados => res.render('cursos/cursoAno', {
+      title: 'Semestres de ' + req.params.idCurso + ' no ' + req.params.ano + 'º ano',
       lista: dados,
       path: req.originalUrl
     }))
@@ -46,6 +49,7 @@ router.get('/:idCurso/ano/:ano', verificaAutenticacao, (req, res) => {
 router.get('/:idCurso', verificaAutenticacao, (req, res) => {
   Post.listarDeCurso(req.params.idCurso)
     .then(dados => res.render('cursos/curso', {
+      title: 'Lista de Anos de ' + req.params.idCurso,
       lista: dados,
       path: req.originalUrl
     }))
