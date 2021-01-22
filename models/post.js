@@ -4,7 +4,7 @@ var Schema = mongoose.Schema
 var CommentSchema = new Schema({
     body: String,
     user: String,
-    likes: { type: Number, default: 0 },
+    likes: [String],
     date: { type: Date, default: Date.now }
 })
 
@@ -24,7 +24,7 @@ var PostSchema = new Schema({
         curso: String,
         ano: String,
         semestre: String,
-        votes: { type: Number, default: 0 },
+        votes: [String],
         favs: [String], //nomes de users que deram fav
     }
 });

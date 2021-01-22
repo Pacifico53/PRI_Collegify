@@ -7,20 +7,27 @@ html
     .w3-container.w3-deep-orange
       h2.w3-left [#{post.type}] #{post.title}
       .w3-btn.w3-black.w3-right.w3-center.w3-round.w3-margin
-          a(href="/users/logout") Logout
+        a(href="/users/logout") Logout
 
   .w3-container.w3-sand.w3-margin.w3-border
     h2 Título: #{post.title}
     h3 Subtítulo: #{post.subtitle}
     p Descrição: #{post.description}
     p
-      | #{post.meta.favs.lenght} Favoritos
-      span(style="display:block;float:right;width:50%;margin-left:10px;") #{post.meta.votes} Likes
+      | #{post.meta.favs.length} Favoritos
+      span(style="display:block;float:right;width:50%;margin-left:10px;") #{post.meta.votes.length} Likes
+
+    form(action="/posts/like/" + post._id method="POST")
+      p
+      button.w3-hover-yellow.w3-border.w3-deep-orange.w3-round-xxlarge.w3-margin(type="submit" name="like") Like
+      p
+
+
     form(action="/posts/fav/" + post._id method="POST")
       p
       button.w3-hover-yellow.w3-border.w3-deep-orange.w3-round-xxlarge.w3-margin(type="submit" name="favorite") Adicionar aos Favoritos
       p
-    p #{post.dateRegister}
+    p Publicado em #{post.dateRegister.toLocaleString('pt-PT')}
     p
     a.w3-btn.w3-hover-black.w3-border.w3-deep-orange.w3-round-xxlarge.w3-margin(href='/posts/download/' + post.filename) ⬇ DOWNLOAD
   .w3-container.w3-pale-red
@@ -30,7 +37,7 @@ html
         p
         textarea.w3-input.w3-border.w3-round(style="resize: vertical;" name="comment" type="text" placeholder="Escreve aqui o teu comentário")
         p
-         button.w3-btn.w3-hover-black.w3-border.w3-deep-orange.w3-round-xxlarge.w3-margin(type="submit" name="commentbutton") Submeter
+          button.w3-btn.w3-hover-black.w3-border.w3-deep-orange.w3-round-xxlarge.w3-margin(type="submit" name="commentbutton") Submeter
         p
       if post.comments.length == 0
         p Be the first to comment!
@@ -40,10 +47,10 @@ html
             h4= c.user
             .w3-container.w3-border.w3-khaki.w3-round
               p(style="font-size=80%")=c.body
-            p(style="font-size=80%") #{c.likes} Likes 
-            
-              button.w3-circle.w3-hover-yellow.w3-deep-orange.w3-black.w3-xlarge(type="submit" name="like") 👍
-            p(style="font-size=80%")= c.date
+            p(style="font-size=80%") #{c.likes.length} Likes 
+              form(action="/posts/likeComment/" + post._id method="POST")
+                button.w3-circle.w3-hover-yellow.w3-deep-orange.w3-black.w3-large(type="submit" name="like") 👍
+            p(style="font-size=80%")= c.date.toLocaleString('pt-PT')
   .w3-container.w3-deep-orange
     a.w3-btn.w3-hover-orange.w3-sand.w3-round-xxlarge.w3-margin(href='/posts/') Voltar aos Posts
 

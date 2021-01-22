@@ -91,8 +91,20 @@ module.exports.addFavourite = (idPost, username) => {
   this.consultar(idPost)
     .then(dados => {
       const listfavs = dados.meta.favs
-      if (!listfavs.contains(username)) {
+      if (!listfavs.includes(username)) {
         dados.meta.favs.push(username)
+      }
+      dados.save()
+    })
+}
+
+// Adiciona um favorito
+module.exports.addLike = (idPost, username) => {
+  this.consultar(idPost)
+    .then(dados => {
+      const listLikes = dados.meta.votes
+      if (!listLikes.includes(username)) {
+        dados.meta.votes.push(username)
       }
       dados.save()
     })

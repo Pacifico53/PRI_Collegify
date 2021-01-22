@@ -85,6 +85,12 @@ router.post('/fav/:idPost', function (req, res) {
   res.redirect('back');
 })
 
+//POST like
+router.post('/like/:idPost', function (req, res) {
+  Post.addLike(req.params.idPost, req.user.username);
+  res.redirect('back');
+})
+
 
 // GET post page.
 router.get('/:idPost', verificaAutenticacao, (req, res) => {
