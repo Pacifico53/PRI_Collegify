@@ -1,27 +1,27 @@
-doctype html
-html(lang="en")
-  head
-    title Upload post
-    meta(charset='UTF-8')
-    meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    link(rel='stylesheet', href='../stylesheets/loginstyle.css')
-  body
-    #main
-      form(action="/posts/upload" method="POST" enctype="multipart/form-data")
-        div.label Upload conteúdo
-        div.username
-          input(name="title" type="text" placeholder="Title*")
-        div.username
-          input(name="subtitle" type="text" placeholder="Subtitle")
-        div.username
-          input(name="description" type="text" placeholder="Description")
-        div.username
-          input(name="curso" type="text" placeholder="Curso")
-        div.username
-          input(name="ano" type="text" placeholder="Ano")
-        div.username
-          input(name="semestre" type="text" placeholder="Semestre")          
-        div
+extends ../layout
+
+block content
+    .w3-container.w3-sand.w3-margin.w3-border
+      form.w3-container(action="/posts/upload" method="POST" enctype="multipart/form-data" id="form-upload")
+        p
+        label.w3-bold Título
+        input.w3-input.w3-border(name="title" type="text")
+        p      
+        label.w3-bold Subtitle
+        input.w3-input.w3-border(name="subtitle" type="text" placeholder="Subtitle")
+        p      
+        label.w3-bold Descrição
+        input.w3-input.w3-border(name="description" type="text" placeholder="Description")
+        p      
+        label.w3-bold Curso
+        input.w3-input.w3-border(name="curso" type="text" placeholder="Curso")
+        p
+        lable Tipo de Utilizador
+        select.w3-input.w3-border(name="level")
+          option(value="produtor" selected) Produtor
+          option(value="consumidor") Consumidor
+        p
+        lable Tipo de Post
           select(name="type").w3-input.w3-border
             option(value="Relatório" selected) Relatório
             option(value="Tpc") Tpc
@@ -30,14 +30,22 @@ html(lang="en")
             option(value="Aplicação") Aplicação
             option(value="Slides") Slides
             option(value="Teste") Teste
-        div
-          label Privado
-            input(name="visibility" type="radio" value="Privado") 
-          label Público
-            input(name="visibility" type="radio" value="Público" checked) 
-        div.username
-          input(name="tags" type="text" placeholder="Tags")
-        input(class="w3-input w3-border w3-light-grey" type="file" name="myFile")
-        button(type="submit") Upload
         p
-          a(href="/") Voltar para Homepage
+        label Público
+          input.w3-margin(name="visibility" type="radio" value="Público" checked)
+        label Privado
+          input.w3-margin(name="visibility" type="radio" value="Privado")  
+        p
+        label.w3-bold Tags
+        input.w3-input.w3-border(name="tags" type="text" placeholder="Tags")
+        p
+        input(class="w3-input w3-border w3-light-grey" type="file" name="myFile")
+        .w3-padding
+          button.w3-deep-orange.w3-round-xxlarge.w3-margin(type="submit") Upload
+    .w3-container.w3-deep-orange.w3-center
+      a.w3-btn.w3-hover-orange.w3-sand.w3-round-xxlarge.w3-margin(href="/posts") Voltar ao Posts
+      a.w3-center.w3-padding Gerado por Collegify :: 2020
+      a.w3-btn.w3-hover-orange.w3-sand.w3-round-xxlarge.w3-margin(href="/") Voltar a homepage
+
+
+
