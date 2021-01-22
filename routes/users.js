@@ -16,6 +16,7 @@ router.get('/', function (req, res, next) {
         }))
 });
 
+// GET '/users/logout' to clean cookie
 router.get('/logout', function (req, res) {
     req.logout();
     req.session.destroy(function (err) {
@@ -28,6 +29,7 @@ router.get('/logout', function (req, res) {
     });
 });
 
+// POST '/users/login'  login
 router.post('/login', passport.authenticate('local', { failureRedirect: '/login' }), function (req, res) {
     res.redirect('/main')
 })
