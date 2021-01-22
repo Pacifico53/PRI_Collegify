@@ -42,15 +42,17 @@ html
       if post.comments.length == 0
         p Be the first to comment!
       else
+        - i = 0;
         each c in post.comments
           .w3-container.w3-border.w3-orange.w3-round
             h4= c.user
             .w3-container.w3-border.w3-khaki.w3-round
               p(style="font-size=80%")=c.body
             p(style="font-size=80%") #{c.likes.length} Likes 
-              form(action="/posts/likeComment/" + post._id method="POST")
+              form(action="/posts/likeComment/" + i + "/" + post._id method="POST")
                 button.w3-circle.w3-hover-yellow.w3-deep-orange.w3-black.w3-large(type="submit" name="like") 👍
             p(style="font-size=80%")= c.date.toLocaleString('pt-PT')
+            - i++;
   .w3-container.w3-deep-orange
     a.w3-btn.w3-hover-orange.w3-sand.w3-round-xxlarge.w3-margin(href='/posts/') Voltar aos Posts
 

@@ -91,6 +91,13 @@ router.post('/like/:idPost', function (req, res) {
   res.redirect('back');
 })
 
+//POST like comment
+router.post('/likeComment/:index/:idPost', function (req, res) {
+  Post.addLikeToComment(req.params.idPost, req.user.username, req.params.index);
+  res.redirect('back');
+})
+
+
 
 // GET post page.
 router.get('/:idPost', verificaAutenticacao, (req, res) => {

@@ -98,13 +98,25 @@ module.exports.addFavourite = (idPost, username) => {
     })
 }
 
-// Adiciona um favorito
+// Adiciona um like
 module.exports.addLike = (idPost, username) => {
   this.consultar(idPost)
     .then(dados => {
       const listLikes = dados.meta.votes
       if (!listLikes.includes(username)) {
         dados.meta.votes.push(username)
+      }
+      dados.save()
+    })
+}
+
+// Adiciona um like a um comentario
+module.exports.addLikeToComment = (idPost, username, index) => {
+  this.consultar(idPost)
+    .then(dados => {
+      var comment = dados.comments[index]
+      if (!comment.likes.includes(username)) {
+        comment.likes.push(username)
       }
       dados.save()
     })
