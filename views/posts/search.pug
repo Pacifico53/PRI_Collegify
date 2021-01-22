@@ -1,0 +1,42 @@
+extends ../layout
+
+block content
+  .w3-card-4
+    div(class="w3-container")
+      form(action="/posts/search/" method="POST")
+        p
+          strong Range de datas
+        label(for='initdate') Data inicial 
+        input(type='date' id='initdate' name='initdate')
+        p
+        label(for='enddate') Data final   
+        input(type='date' id='enddate' name='enddate')
+
+        p 
+          strong Tipo de documento:
+        select(name="type" id="type").w3-input.w3-border
+          option(value="Relatório" selected) Relatório
+          option(value="Tpc") Tpc
+          option(value="Artigo") Artigo
+          option(value="Tese") Tese
+          option(value="Aplicação") Aplicação
+          option(value="Slides") Slides
+          option(value="Teste") Teste
+        p 
+          strong Curso:
+        input(name="curso" id='curso' type="text" placeholder="Curso")          
+        p 
+          strong Ano:
+        input(name="ano" type="text" placeholder="Ano")
+        p 
+          strong Semestre:
+        input(name="semestre" type="text" placeholder="Semestre") 
+        p
+          button(type='submit').w3-btn.w3-hover-orange.w3-khaki.w3-round-xxlarge.w3-margin Pesquisar
+
+    p
+      div(class="w3-container")
+        p Utiliza os parâmetros para realizar uma pesquisa.
+      .w3-container.w3-deep-orange.w3-center
+        a.w3-btn.w3-hover-orange.w3-sand.w3-round-xxlarge.w3-margin(href="/") Voltar a homepage
+        a.w3-center.w3-padding Gerado por Collegify :: 2020

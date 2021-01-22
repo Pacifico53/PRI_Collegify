@@ -4,6 +4,7 @@ var fs = require('fs')
 var passport = require('passport')
 
 const Post = require('../controllers/post');
+const User = require('../controllers/user')
 
 var multer = require('multer')
 var upload = multer({ dest: 'uploads/' })
@@ -26,6 +27,34 @@ router.get('/upload', verificaAutenticacao, (req, res) => {
     title: 'Upload'
   })
 })
+
+
+// // GET search page
+// router.get('/search', verificaAutenticacao, (req, res) => {
+//   res.render('posts/search', {
+//     title: 'Filtragem'
+//   })
+// })
+
+// // POST search page
+// router.post('/search', verificaAutenticacao, (req, res) => {
+//   Post.listar()
+//     .then(dados => {
+//       var filteredList = []
+
+//       dados.forEach(p => {
+        
+//       });
+
+//       res.render('posts/posts', {
+//         title: 'Lista de Posts',
+//         lista: filteredList
+//       })
+//     })
+//     .catch(e => res.render('error', {
+//       error: e
+//     }))
+// })
 
 // POST upload file
 router.post('/upload', upload.single('myFile'), (req, res) => {
@@ -82,6 +111,7 @@ router.post('/comment/:idPost', function (req, res) {
 //POST favorito
 router.post('/fav/:idPost', function (req, res) {
   Post.addFavourite(req.params.idPost, req.user.username);
+  User.addFavourite(req.user._id, req.params.idPost);
   res.redirect('back');
 })
 

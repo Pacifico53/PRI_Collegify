@@ -42,3 +42,16 @@ module.exports.atualizar = (id, user) => {
             _id: id
         }, user)
 }
+
+// Adiciona um favorito
+module.exports.addFavourite = (idUser, idPost) => {
+    this.consultar(idUser)
+      .then(dados => {
+        const listfavs = dados.favPostIds
+        if (!listfavs.includes(idPost)) {
+          dados.favPostIds.push(idPost)
+        }
+        dados.save()
+      })
+  }
+  
