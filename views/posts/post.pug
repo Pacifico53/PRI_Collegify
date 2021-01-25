@@ -11,7 +11,8 @@ html
 
   .w3-container.w3-sand.w3-margin.w3-border
     h2 Título: #{post.title}
-    h3 Subtítulo: #{post.subtitle}
+    if (post.subtitle)
+      h3 Subtítulo: #{post.subtitle}
     p Descrição: #{post.description}
     p
       | #{post.meta.favs.length} Favoritos
