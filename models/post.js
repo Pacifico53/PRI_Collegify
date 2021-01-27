@@ -24,6 +24,7 @@ var PostSchema = new Schema({
         curso: String,
         ano: String,
         semestre: String,
+        cadeira: String,
         votes: [String],
         favs: [String], //nomes de users que deram fav
     }

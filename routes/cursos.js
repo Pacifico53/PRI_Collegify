@@ -15,12 +15,13 @@ router.get('/', verificaAutenticacao, function (req, res, next) {
     }))
 });
 
-// GET curso page.
+// GET cadeiras de curso de certo ano e semestre.
 router.get('/:idCurso/ano/:ano/semestre/:sem', verificaAutenticacao, (req, res) => {
   Post.listarDeCursoAnoSemestre(req.params.idCurso, req.params.ano, req.params.sem)
-    .then(dados => res.render('cursos/cursoSemestre', {
-      title: 'Posts de ' + req.params.idCurso + ' ' + req.params.ano + 'º ano ' + req.params.sem + 'º semstre',
+    .then(dados => res.render('cursos/cursoAnoSemestre', {
+      title: 'Cadeiras de ' + req.params.idCurso + ' ' + req.params.ano + 'º ano ' + req.params.sem + 'º semestre',
       lista: dados,
+      path: req.originalUrl,
       curso: req.params.idCurso,
       ano: req.params.ano,
       sem: req.params.sem
@@ -30,8 +31,21 @@ router.get('/:idCurso/ano/:ano/semestre/:sem', verificaAutenticacao, (req, res) 
     }))
 });
 
+// GET cadeiras de curso de certo ano e semestre.
+router.get('/:idCurso/ano/:ano/semestre/:sem/uc/:uc', verificaAutenticacao, (req, res) => {
+  Post.listarDeCursoAnoSemestreUC(req.params.idCurso, req.params.ano, req.params.sem, req.params.uc)
+    .then(dados => res.render('cursos/cursoUC', {
+      title: 'Posts de ' + req.params.idCurso + ' ' + req.params.ano +
+             'º ano ' + req.params.sem + 'º semestre ' + req.params.uc,
+      lista: dados,
+    }))
+    .catch(e => res.render('error', {
+      error: e
+    }))
+});
 
-// GET curso page.
+
+// GET semestres de ano de curso.
 router.get('/:idCurso/ano/:ano', verificaAutenticacao, (req, res) => {
   Post.listarDeCursoAno(req.params.idCurso, req.params.ano)
     .then(dados => res.render('cursos/cursoAno', {
@@ -45,7 +59,7 @@ router.get('/:idCurso/ano/:ano', verificaAutenticacao, (req, res) => {
 });
 
 
-// GET curso page.
+// GET anos de curso.
 router.get('/:idCurso', verificaAutenticacao, (req, res) => {
   Post.listarDeCurso(req.params.idCurso)
     .then(dados => res.render('cursos/curso', {
