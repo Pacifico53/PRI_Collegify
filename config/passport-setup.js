@@ -29,19 +29,20 @@ passport.use(
     clientSecret: keys.google.clientSecret
   }, (accessToken, refreshToken, profile, done) => {
     console.log('passsport calback functin fired')
-    console.log(JSON.stringify(profile))
+    console.log(profile)
     User.lookUpGoogleID(profile.id)
       .then(dados => {
+        console.log('entrei no lookUpGoogle')
         const user = dados
         if (user !== null) {
           done(null, user);
         } else {
-          user = new User({
+          var usr = {
             googleID: profile.id,
             name: profile.displayName,
-            dateRegister: Date.now()
-          });
-          User.inserir(user)
+            username: profile.id
+          }
+          User.inserir(usr)
             .then(u => {
               return done(null, user)
             })
