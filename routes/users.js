@@ -86,4 +86,16 @@ router.get('/:idUser', (req, res) => {
         }))
 })
 
+router.get('/google',
+    passport.authenticate('google', { scope: ['profile'] }));
+
+
+// POST '/google/redirect'  login
+router.get('/google/callback',
+    passport.authenticate('google', { failureRedirect: '/login' }),
+    function (req, res) {
+        // Successful authentication, redirect home.
+        res.redirect('/main')
+    });
+
 module.exports = router;

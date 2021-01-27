@@ -6,16 +6,14 @@ var logger = require('morgan');
 
 const favicon = require('express-favicon');
 
-var User = require('./controllers/user')
-
 var mongoose = require('mongoose');
 
 var { v4: uuidv4 } = require('uuid');
 var session = require('express-session');
 const FileStore = require('session-file-store')(session);
+const passport = require('passport');
+const passportSetup = require('./config/passport-setup');
 
-var passport = require('passport')
-var LocalStrategy = require('passport-local').Strategy
 
 //Set up default mongoose connection
 var mongoDB = 'mongodb://127.0.0.1/Collegify';
@@ -33,37 +31,6 @@ db.once('open', function () {
   console.log("MongoDB connected successfully...")
 });
 
-
-// Configuração da estratégia local
-passport.use(new LocalStrategy(
-  { usernameField: 'username' }, (username, password, done) => {
-    User.lookUpUsername(username)
-      .then(dados => {
-        const user = dados
-        if (!user) { return done(null, false, { message: 'Utilizador inexistente!\n' }) }
-        if (password != user.password) { return done(null, false, { message: 'Credenciais inválidas!\n' }) }
-        return done(null, user)
-      })
-      .catch(erro => {
-        console.log("erro")
-        done(erro)
-      })
-  })
-)
-
-// Indica-se ao passport como serializar o utilizador
-passport.serializeUser((user, done) => {
-  console.log('Serielização user: ' + JSON.stringify(user))
-  done(null, user.username)
-})
-
-// Desserialização: a partir do id obtem-se a informação do utilizador
-passport.deserializeUser((uid, done) => {
-  console.log('Desserielização, id: ' + uid)
-  User.lookUpUsername(uid)
-    .then(dados => done(null, dados))
-    .catch(erro => done(erro, false))
-})
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');

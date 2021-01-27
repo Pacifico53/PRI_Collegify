@@ -23,6 +23,13 @@ module.exports.lookUpUsername = uname => {
         .exec()
 }
 
+module.exports.lookUpGoogleID = id => {
+    return User
+        .findOne({
+            googleID: id
+        })
+        .exec()
+}
 
 module.exports.inserir = u => {
     var novo = new User(u)
@@ -46,12 +53,11 @@ module.exports.atualizar = (id, user) => {
 // Adiciona um favorito
 module.exports.addFavourite = (idUser, idPost) => {
     this.consultar(idUser)
-      .then(dados => {
-        const listfavs = dados.favPostIds
-        if (!listfavs.includes(idPost)) {
-          dados.favPostIds.push(idPost)
-        }
-        dados.save()
-      })
-  }
-  
+        .then(dados => {
+            const listfavs = dados.favPostIds
+            if (!listfavs.includes(idPost)) {
+                dados.favPostIds.push(idPost)
+            }
+            dados.save()
+        })
+}

@@ -10,7 +10,8 @@ var Schema = new mongoose.Schema({
     dateLast: { type: Date, default: Date.now },
     curso: String,
     affiliation: String,
-    favPostIds: [String]
+    favPostIds: [String],
+    googleID: String
 });
 
 module.exports = mongoose.model('User', Schema, 'users')
