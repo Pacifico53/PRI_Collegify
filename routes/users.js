@@ -74,6 +74,10 @@ router.post('/update/:idUser', (req, res) => {
         }))
 })
 
+router.get('/google',
+    passport.authenticate('google', { scope: ['profile'] }));
+
+
 //GET user page
 router.get('/:idUser', (req, res) => {
     var idUser = req.params.idUser
@@ -85,9 +89,6 @@ router.get('/:idUser', (req, res) => {
             error: e
         }))
 })
-
-router.get('/google',
-    passport.authenticate('google', { scope: ['profile'] }));
 
 
 // POST '/google/redirect'  login
