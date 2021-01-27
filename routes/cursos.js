@@ -22,16 +22,13 @@ router.get('/:idCurso/ano/:ano/semestre/:sem', verificaAutenticacao, (req, res) 
       title: 'Cadeiras de ' + req.params.idCurso + ' ' + req.params.ano + 'º ano ' + req.params.sem + 'º semestre',
       lista: dados,
       path: req.originalUrl,
-      curso: req.params.idCurso,
-      ano: req.params.ano,
-      sem: req.params.sem
     }))
     .catch(e => res.render('error', {
       error: e
     }))
 });
 
-// GET cadeiras de curso de certo ano e semestre.
+// GET posts de curso de certo ano, semestre e uc.
 router.get('/:idCurso/ano/:ano/semestre/:sem/uc/:uc', verificaAutenticacao, (req, res) => {
   Post.listarDeCursoAnoSemestreUC(req.params.idCurso, req.params.ano, req.params.sem, req.params.uc)
     .then(dados => res.render('cursos/cursoUC', {
