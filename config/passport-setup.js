@@ -24,15 +24,14 @@ module.exports = passport.use(new LocalStrategy(
 // Configuração da estratégia google
 passport.use(
   new GoogleStrategy({
-    callbackURL: '/users/google/callback',
+    callbackURL: '/auth/google/callback',
     clientID: keys.google.clientID,
     clientSecret: keys.google.clientSecret
   }, (accessToken, refreshToken, profile, done) => {
-    console.log('passsport calback functin fired')
+    console.log('Google callback function fired')
     console.log(profile)
     User.lookUpGoogleID(profile.id)
       .then(dados => {
-        console.log('entrei no lookUpGoogle')
         const user = dados
         if (user !== null) {
           done(null, user);
@@ -40,6 +39,7 @@ passport.use(
           var usr = {
             googleID: profile.id,
             name: profile.displayName,
+            email: profile.emails[0].value,
             username: profile.id
           }
           User.inserir(usr)
@@ -53,7 +53,7 @@ passport.use(
         }
       })
       .catch(erro => {
-        console.log("erro")
+        console.log("Erro lookUpGoogleID:")
         done(erro)
       })
   })

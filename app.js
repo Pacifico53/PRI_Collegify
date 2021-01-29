@@ -33,6 +33,7 @@ db.once('open', function () {
 
 
 var indexRouter = require('./routes/index');
+var authRouter = require('./routes/auth');
 var usersRouter = require('./routes/users');
 var postsRouter = require('./routes/posts');
 var cursosRouter = require('./routes/cursos');
@@ -66,6 +67,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/', indexRouter);
+app.use('/auth', authRouter)
 app.use('/users', usersRouter);
 app.use('/posts', postsRouter);
 app.use('/cursos', cursosRouter);
