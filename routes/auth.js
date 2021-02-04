@@ -15,12 +15,26 @@ router.get('/google/callback',
     if ('password' in req.user) {
       res.redirect('/main')
     } else {
-      // TODO adicionar a pagina de password
+      // TODO adicionar a pagina de password   <<<============
       res.redirect('/main')
     }
   });
 
 // Facebook
+router.get('/facebook',
+  passport.authenticate('facebook', { scope: ['email'] }));
+
+router.get('/facebook/callback',
+  passport.authenticate('facebook', { failureRedirect: '/login' }),
+  function (req, res) {
+    // Successful authentication, redirect home.
+    if ('password' in req.user) {
+      res.redirect('/main')
+    } else {
+      // TODO adicionar a pagina de password   <<<============
+      res.redirect('/main')
+    }
+  });
 // TODO
 // Github
 // TODO

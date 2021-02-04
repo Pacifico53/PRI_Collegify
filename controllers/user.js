@@ -31,6 +31,14 @@ module.exports.lookUpGoogleID = id => {
         .exec()
 }
 
+module.exports.lookUpFacebookID = id => {
+    return User
+        .findOne({
+            facebookID: id
+        })
+        .exec()
+}
+
 module.exports.inserir = u => {
     var novo = new User(u)
     return novo.save()

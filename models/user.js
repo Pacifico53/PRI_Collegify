@@ -11,7 +11,8 @@ var Schema = new mongoose.Schema({
     curso: String,
     affiliation: String,
     favPostIds: [String],
-    googleID: String
+    googleID: String,
+    facebookID: String
 });
 
 module.exports = mongoose.model('User', Schema, 'users')

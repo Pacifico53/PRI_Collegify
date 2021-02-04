@@ -1,7 +1,10 @@
-extends layout
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/w3.css')
 
-block content
-  h3="Página de Erro"
-  h1= message
-  h2= error.status
-  pre #{error.stack}
+  body
+    h3="Página de Erro"
+    h1= message
+    h2= error.status
+    pre #{error.stack}

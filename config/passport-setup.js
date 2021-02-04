@@ -1,5 +1,6 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
 const keys = require('./keys');
 const LocalStrategy = require('passport-local').Strategy
 var User = require('../controllers/user')
@@ -58,6 +59,50 @@ passport.use(
       })
   })
 )
+
+// Configuração da estratégia google
+passport.use(new FacebookStrategy({
+  clientID: keys.facebook.appID,
+  clientSecret: keys.facebook.appSecret,
+  callbackURL: "http://localhost:3000/auth/facebook/callback",
+  profileFields: ['id', 'email', 'displayName', 'profileUrl']
+},
+  function (accessToken, refreshToken, profile, cb) {
+    console.log('Facebook callback function fired')
+    console.log(profile)
+    User.lookUpFacebookID(profile.id)
+      .then(dados => {
+        const user = dados
+        if (user !== null) {
+          done(null, user);
+        } else {
+          var usr = {
+            facebookID: profile.id,
+            name: profile.displayName,
+            email: profile.emails[0].value,
+            username: profile.id
+          }
+          console.log('Utilizador resultante:')
+          console.log(usr)
+          User.inserir(usr)
+            .then(u => {
+              return done(null, user)
+            })
+            .catch(erro => {
+              console.log("Erro a inserir o user FB callback")
+              done(erro)
+            })
+        }
+      })
+      .catch(erro => {
+        console.log("Erro lookUpFacebookID:")
+        console.log(erro)
+        console.log('Acabou o erro')
+        done(erro)
+      })
+
+  }
+));
 
 // Indica-se ao passport como serializar o utilizador
 passport.serializeUser((user, done) => {
