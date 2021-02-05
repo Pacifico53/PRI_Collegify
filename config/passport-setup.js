@@ -67,7 +67,7 @@ passport.use(new FacebookStrategy({
   callbackURL: "http://localhost:3000/auth/facebook/callback",
   profileFields: ['id', 'email', 'displayName', 'profileUrl']
 },
-  function (accessToken, refreshToken, profile, cb) {
+  function (accessToken, refreshToken, profile, done) {
     console.log('Facebook callback function fired')
     console.log(profile)
     User.lookUpFacebookID(profile.id)
