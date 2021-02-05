@@ -25,6 +25,13 @@ nodemon
  * GET /signup
  * GET /main
  * GET /main
+ #### Auth
+ * GET /auth/google
+ * GET /auth/google/callback
+ * GET /auth/google/callback
+ * GET /auth/facebook
+ * GET /auth/facebook/callback
+ * GET /auth/facebook/callback
  #### Users
  * GET /users
  * GET /users/logout
@@ -53,6 +60,8 @@ nodemon
  * GET /cursos
  * GET /cursos/:idCurso/ano/:ano/semestre/:sem
  * GET /cursos/:idCurso/ano/:ano/semestre/:sem
+ * GET /cursos/:idCurso/ano/:ano/semestre/:sem/uc/:uc
+ * GET /cursos/:idCurso/ano/:ano/semestre/:sem/uc/:uc
  * GET /cursos/:idCurso/ano/:ano
  * GET /cursos/:idCurso/ano/:ano
  * GET /cursos/:idCurso
