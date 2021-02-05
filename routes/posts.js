@@ -80,7 +80,8 @@ router.post('/upload', upload.single('myFile'), (req, res) => {
         meta: {
           curso: req.body.curso,
           ano: req.body.ano,
-          semestre: req.body.semestre
+          semestre: req.body.semestre,
+          cadeira: req.body.cadeira
         }
       }
 
@@ -126,7 +127,6 @@ router.post('/likeComment/:index/:idPost', function (req, res) {
   Post.addLikeToComment(req.params.idPost, req.user.username, req.params.index);
   res.redirect('back');
 })
-
 
 
 // GET post page.

@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  .w3-card-4
+    if lista.length > 0
+      .w3-container
+        - var values = [];
+        each val in lista
+          -
+            if(!values.includes(val.meta.cadeira) && val.meta.cadeira){
+              values.push(val.meta.cadeira)
+            }
+        - values.sort();
+        ul
+          each val in values
+            li
+              a(href=path + '/uc/' + val) #{val}
+    else
+      div(class="w3-container")
+        p Ainda não há cadeiras...
+block footer

@@ -77,6 +77,19 @@ module.exports.listarDeCursoAnoSemestre = (idCurso, ano, sem) => {
     .exec()
 }
 
+// Devolve uma lista de Posts de curso de dado ano, semestre e uc
+module.exports.listarDeCursoAnoSemestreUC = (idCurso, ano, sem, uc) => {
+  return Post
+    .find({
+      'meta.curso': idCurso,
+      'meta.ano': ano,
+      'meta.semestre': sem,
+      'meta.cadeira': uc
+    })
+    .exec()
+}
+
+
 // Adiciona um comentário a um post
 module.exports.addComment = (idPost, comment) => {
   this.consultar(idPost)
@@ -122,7 +135,7 @@ module.exports.addLikeToComment = (idPost, username, index) => {
     })
 }
 
-// Search posts
+// Search posts TODO
 module.exports.searchFilter = (params) => {
   return Post
     .find(params)
