@@ -34,9 +34,9 @@ block content
               td
                 a(href='/posts/'+a._id)= a.description
               td
-                a(href='/posts/'+a._id)= a.dateCreation
+                a(href='/posts/'+a._id)= a.dateCreation.toLocaleString('pt-PT')
               td
-                a(href='/posts/'+a._id)= a.dateRegister
+                a(href='/posts/'+a._id)= a.dateRegister.toLocaleString('pt-PT')
               td
                 a(href='/posts/'+a._id)= a.visibility
               td
