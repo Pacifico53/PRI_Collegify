@@ -76,7 +76,6 @@ router.post('/update/:idUser', (req, res) => {
 
 //GET user page
 router.get('/profilePage', (req, res) => {
-    console.log(req.user);
     var idUser = req.user._id
     User.consultar(idUser)
         .then(dados => res.render('users/user', {
@@ -93,9 +92,9 @@ router.get('/profilePage', (req, res) => {
 router.get('/:uname', (req, res) => {
     var uname = req.params.uname;
     var checksame = false
+
     if (uname == req.user.username) {
         checksame = true;
-        console.log("TRUEEE");
     }
 
     User.lookUpUsername(uname)

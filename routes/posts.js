@@ -47,7 +47,7 @@ router.post('/:idPost/edit', (req, res) => {
     uploader: req.user.username,
     description: req.body.description,
     visibility: req.body.visibility,
-   // tags: req.body.tags,.split(" "),
+    // tags: req.body.tags,.split(" "),
     meta: {
       curso: req.body.curso,
       ano: req.body.ano,
@@ -55,8 +55,6 @@ router.post('/:idPost/edit', (req, res) => {
       cadeira: req.body.cadeira
     }
   }
-
-  console.log(post);
 
   Post.atualizar(idPost, post)
     .then(() => res.redirect('/posts'))
