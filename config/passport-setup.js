@@ -27,36 +27,53 @@ passport.use(
   new GoogleStrategy({
     callbackURL: '/auth/google/callback',
     clientID: keys.google.clientID,
-    clientSecret: keys.google.clientSecret
-  }, (accessToken, refreshToken, profile, done) => {
+    clientSecret: keys.google.clientSecret,
+    passReqToCallback: true
+  }, (req, accessToken, refreshToken, profile, done) => {
     console.log('Google callback function fired')
     console.log(profile)
-    User.lookUpGoogleID(profile.id)
-      .then(dados => {
-        const user = dados
-        if (user !== null) {
-          done(null, user);
-        } else {
-          var usr = {
-            googleID: profile.id,
-            name: profile.displayName,
-            email: profile.emails[0].value,
-            username: profile.id
+    console.log('User do req')
+    console.log(req.user);
+    if (req.user) {
+      var googleUser = { googleID: profile.id }
+      User.atualizar(req.user["_id"], googleUser)
+        .then(u => {
+          req.user["googleID"] = profile.id
+          console.log(req.user)
+          return done(null, req.user)
+        })
+        .catch(erro => {
+          console.log("GoogleStrategy req.user, erro ao atualizar!")
+          done(erro)
+        })
+    } else {
+      User.lookUpGoogleID(profile.id)
+        .then(dados => {
+          const user = dados
+          if (user !== null) {
+            done(null, user);
+          } else {
+            var usr = {
+              googleID: profile.id,
+              name: profile.displayName,
+              email: profile.emails[0].value,
+              username: profile.id
+            }
+            User.inserir(usr)
+              .then(u => {
+                return done(null, user)
+              })
+              .catch(erro => {
+                console.log("erro")
+                done(erro)
+              })
           }
-          User.inserir(usr)
-            .then(u => {
-              return done(null, user)
-            })
-            .catch(erro => {
-              console.log("erro")
-              done(erro)
-            })
-        }
-      })
-      .catch(erro => {
-        console.log("Erro lookUpGoogleID:")
-        done(erro)
-      })
+        })
+        .catch(erro => {
+          console.log("Erro lookUpGoogleID:")
+          done(erro)
+        })
+    }
   })
 )
 
@@ -65,42 +82,58 @@ passport.use(new FacebookStrategy({
   clientID: keys.facebook.appID,
   clientSecret: keys.facebook.appSecret,
   callbackURL: "http://localhost:3000/auth/facebook/callback",
-  profileFields: ['id', 'email', 'displayName', 'profileUrl']
+  profileFields: ['id', 'email', 'displayName', 'profileUrl'],
+  passReqToCallback: true
 },
-  function (accessToken, refreshToken, profile, done) {
+  function (req, accessToken, refreshToken, profile, done) {
     console.log('Facebook callback function fired')
     console.log(profile)
-    User.lookUpFacebookID(profile.id)
-      .then(dados => {
-        const user = dados
-        if (user !== null) {
-          done(null, user);
-        } else {
-          var usr = {
-            facebookID: profile.id,
-            name: profile.displayName,
-            email: profile.emails[0].value,
-            username: profile.id
+    console.log('User do req')
+    console.log(req.user)
+    if (req.user) {
+      var facebookUser = { facebookID: profile.id }
+      User.atualizar(req.user["_id"], facebookUser)
+        .then(u => {
+          req.user["facebookID"] = profile.id
+          console.log(req.user)
+          return done(null, req.user)
+        })
+        .catch(erro => {
+          console.log("FacebookStrategy req.user, erro ao atualizar!")
+          done(erro)
+        })
+    } else {
+      User.lookUpFacebookID(profile.id)
+        .then(dados => {
+          const user = dados
+          if (user !== null) {
+            done(null, user);
+          } else {
+            var usr = {
+              facebookID: profile.id,
+              name: profile.displayName,
+              email: profile.emails[0].value,
+              username: profile.id
+            }
+            console.log('Utilizador resultante:')
+            console.log(usr)
+            User.inserir(usr)
+              .then(u => {
+                return done(null, user)
+              })
+              .catch(erro => {
+                console.log("Erro a inserir o user FB callback")
+                done(erro)
+              })
           }
-          console.log('Utilizador resultante:')
-          console.log(usr)
-          User.inserir(usr)
-            .then(u => {
-              return done(null, user)
-            })
-            .catch(erro => {
-              console.log("Erro a inserir o user FB callback")
-              done(erro)
-            })
-        }
-      })
-      .catch(erro => {
-        console.log("Erro lookUpFacebookID:")
-        console.log(erro)
-        console.log('Acabou o erro')
-        done(erro)
-      })
-
+        })
+        .catch(erro => {
+          console.log("Erro lookUpFacebookID:")
+          console.log(erro)
+          console.log('Acabou o erro')
+          done(erro)
+        })
+    }
   }
 ));
 
