@@ -13,7 +13,7 @@ var PostSchema = new Schema({
     title: { type: String, required: true },
     subtitle: String,
     filename: String,
-    uploader: String,
+    uploader: { type: String, required: true }, // ir ao id do user
     description: String,
     dateCreation: { type: Date, default: Date.now },
     dateRegister: { type: Date, default: Date.now },

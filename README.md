@@ -24,18 +24,14 @@ nodemon
  * GET /login
  * GET /signup
  * GET /main
- * GET /main
  #### Auth
  * GET /auth/google
  * GET /auth/google/callback
- * GET /auth/google/callback
  * GET /auth/facebook
- * GET /auth/facebook/callback
  * GET /auth/facebook/callback
  #### Users
  * GET /users
  * GET /users/logout
- * POST /users/login
  * POST /users/login
  * POST /users/signup
  * POST /users/delete/:idUser
@@ -43,10 +39,8 @@ nodemon
  * GET /users/:idUser
  #### Posts
  * GET /posts
- * GET /posts
+ * GET /posts/:id/edit
  * GET /posts/upload
- * GET /posts/upload
- * POST /posts/upload
  * POST /posts/upload
  * GET /posts/download/:filename
  * POST /posts/comment/:idPost
@@ -54,15 +48,9 @@ nodemon
  * POST /posts/like/:idPost
  * POST /posts/likeComment/:index/:idPost
  * GET /posts/:idPost
- * GET /posts/:idPost
  #### Cursos
  * GET /cursos
- * GET /cursos
- * GET /cursos/:idCurso/ano/:ano/semestre/:sem
  * GET /cursos/:idCurso/ano/:ano/semestre/:sem
  * GET /cursos/:idCurso/ano/:ano/semestre/:sem/uc/:uc
- * GET /cursos/:idCurso/ano/:ano/semestre/:sem/uc/:uc
  * GET /cursos/:idCurso/ano/:ano
- * GET /cursos/:idCurso/ano/:ano
- * GET /cursos/:idCurso
  * GET /cursos/:idCurso
