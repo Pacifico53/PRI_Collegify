@@ -33,6 +33,8 @@ html
     p Em #{post.dateRegister.toLocaleString('pt-PT')}
     p
     a.w3-btn.w3-hover-black.w3-border.w3-deep-orange.w3-round-xxlarge.w3-margin(href='/posts/download/' + post.filename) ⬇ DOWNLOAD
+
+    a.w3-btn.w3-hover-black.w3-border.w3-deep-orange.w3-round-xxlarge.w3-margin(href=`/posts/${post.id}/edit`) Editar Post
   .w3-container.w3-pale-red
     h3 Comentários
     .w3-container.w3-margin.w3-round.w3-padding
