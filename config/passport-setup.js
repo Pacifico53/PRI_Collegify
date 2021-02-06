@@ -32,6 +32,30 @@ passport.use(
   }, (req, accessToken, refreshToken, profile, done) => {
     console.log('Google callback function fired')
     console.log(profile)
+    var resultUsername = profile.displayName
+    resultUsername.replace(/\s/g,'');
+
+    User.listar()
+      .then(dados => {
+        if (dados.includes(resultUsername)) {
+          var done = true;
+          var i = 0;
+
+          while (done) {
+            resultUsername = resultUsername + i;
+            if (!dados.includes(resultUsername)) {
+              done = false;
+            }
+            i++;
+          }
+        }
+        console.log("calculado uname: " + resultUsername);
+      })
+      .catch(erro => {
+        console.log("Erro gerar nome:")
+        console.log(erro)
+      })
+
     if (req.user) {
       var googleUser = { googleID: profile.id }
       User.atualizar(req.user["_id"], googleUser)
@@ -55,8 +79,10 @@ passport.use(
               googleID: profile.id,
               name: profile.displayName,
               email: profile.emails[0].value,
-              username: profile.id
+              level: 'produtor',
+              username: resultUsername
             }
+            console.log(usr);
             User.inserir(usr)
               .then(u => {
                 return done(null, user)
@@ -86,6 +112,30 @@ passport.use(new FacebookStrategy({
   function (req, accessToken, refreshToken, profile, done) {
     console.log('Facebook callback function fired')
     console.log(profile)
+    var resultUsername = profile.displayName
+    resultUsername.replace(/\s/g,'');
+
+    User.listar()
+      .then(dados => {
+        if (dados.includes(resultUsername)) {
+          var done = true;
+          var i = 0;
+
+          while (done) {
+            resultUsername = resultUsername + i;
+            if (!dados.includes(resultUsername)) {
+              done = false;
+            }
+            i++;
+          }
+        }
+        console.log("calculado uname: " + resultUsername);
+      })
+      .catch(erro => {
+        console.log("Erro gerar nome:")
+        console.log(erro)
+      })
+
     if (req.user) {
       var facebookUser = { facebookID: profile.id }
       User.atualizar(req.user["_id"], facebookUser)
@@ -109,7 +159,7 @@ passport.use(new FacebookStrategy({
               facebookID: profile.id,
               name: profile.displayName,
               email: profile.emails[0].value,
-              username: profile.id
+              username: resultUsername
             }
             console.log('Utilizador resultante:')
             console.log(usr)

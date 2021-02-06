@@ -40,7 +40,9 @@ router.post('/signup', (req, res) => {
         name: req.body.name,
         username: req.body.username,
         email: req.body.email,
+        level: req.body.level,
         curso: req.body.curso,
+        affiliation: req.body.affiliation,
         password: req.body.password
     }
     User.inserir(user)
@@ -73,6 +75,14 @@ router.post('/update/:idUser', (req, res) => {
             error: e
         }))
 })
+
+//GET user page
+router.get('/finishSignup', (req, res) => {
+    res.render('users/finishSignup', {
+        title: "Finalizar nova conta"
+    });
+})
+
 
 //GET user page
 router.get('/profilePage', (req, res) => {

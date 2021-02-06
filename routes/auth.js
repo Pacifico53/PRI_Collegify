@@ -16,7 +16,7 @@ router.get('/google/callback',
       res.redirect('/main')
     } else {
       // TODO adicionar a pagina de password   <<<============
-      res.redirect('/main')
+      res.redirect('/users/finishSignup')
     }
   });
 

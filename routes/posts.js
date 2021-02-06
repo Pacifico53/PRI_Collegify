@@ -36,7 +36,7 @@ router.get('/:idPost/edit', verificaAutenticacao, (req, res) => {
     }))
 })
 
-// POST edit post 
+// POST edit post TODO ISTO VSI DESAPARECER E SO VAI DAR PARA APAGAR
 router.post('/:idPost/edit', (req, res) => {
   var idPost = req.params.idPost
 
