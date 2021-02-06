@@ -32,18 +32,16 @@ passport.use(
   }, (req, accessToken, refreshToken, profile, done) => {
     console.log('Google callback function fired')
     console.log(profile)
-    console.log('User do req')
-    console.log(req.user);
     if (req.user) {
       var googleUser = { googleID: profile.id }
       User.atualizar(req.user["_id"], googleUser)
         .then(u => {
           req.user["googleID"] = profile.id
-          console.log(req.user)
           return done(null, req.user)
         })
         .catch(erro => {
           console.log("GoogleStrategy req.user, erro ao atualizar!")
+          console.log(req.user);
           done(erro)
         })
     } else {
@@ -88,18 +86,16 @@ passport.use(new FacebookStrategy({
   function (req, accessToken, refreshToken, profile, done) {
     console.log('Facebook callback function fired')
     console.log(profile)
-    console.log('User do req')
-    console.log(req.user)
     if (req.user) {
       var facebookUser = { facebookID: profile.id }
       User.atualizar(req.user["_id"], facebookUser)
         .then(u => {
           req.user["facebookID"] = profile.id
-          console.log(req.user)
           return done(null, req.user)
         })
         .catch(erro => {
           console.log("FacebookStrategy req.user, erro ao atualizar!")
+          console.log(req.user)
           done(erro)
         })
     } else {
