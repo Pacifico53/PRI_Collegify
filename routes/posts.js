@@ -22,14 +22,6 @@ router.get('/', verificaAutenticacao, function (req, res, next) {
     }))
 });
 
-// GET upload page
-router.get('/upload', verificaAutenticacao, (req, res) => {
-  res.render('posts/upload', {
-    title: 'Upload'
-  })
-})
-
-
 // GET post edit page
 router.get('/:idPost/edit', verificaAutenticacao, (req, res) => {
   var idPost = req.params.idPost
@@ -51,11 +43,11 @@ router.post('/:idPost/edit', (req, res) => {
   var post = {
     type: req.body.type,
     title: req.body.title,
-    subtitle: req.body.subtitle,   // Opcional
+    subtitle: req.body.subtitle,
     uploader: req.user.username,
     description: req.body.description,
     visibility: req.body.visibility,
-    tags: req.body.tags,//.split(" "),
+   // tags: req.body.tags,.split(" "),
     meta: {
       curso: req.body.curso,
       ano: req.body.ano,
@@ -64,6 +56,8 @@ router.post('/:idPost/edit', (req, res) => {
     }
   }
 
+  console.log(post);
+
   Post.atualizar(idPost, post)
     .then(() => res.redirect('/posts'))
     .catch(e => res.render('error', {
@@ -71,6 +65,12 @@ router.post('/:idPost/edit', (req, res) => {
     }))
 })
 
+// GET upload page
+router.get('/upload', verificaAutenticacao, (req, res) => {
+  res.render('posts/upload', {
+    title: 'Upload'
+  })
+})
 
 // POST upload file
 router.post('/upload', upload.single('myFile'), (req, res) => {
@@ -87,7 +87,7 @@ router.post('/upload', upload.single('myFile'), (req, res) => {
       var post = {
         type: req.body.type,
         title: req.body.title,
-        subtitle: req.body.subtitle,   // Opcional
+        subtitle: req.body.subtitle,
         filename: req.file.originalname,
         uploader: req.user.username,
         description: req.body.description,
@@ -101,13 +101,14 @@ router.post('/upload', upload.single('myFile'), (req, res) => {
         }
       }
 
+      console.log(post);
       Post.inserir(post)
         .then(() => res.redirect('/posts'))
         .catch(e => res.render('error', {
           error: e
         }))
 
-      if(req.body.visibility == "Público"){
+      if (req.body.visibility == "Público") {
         var news = {
           typeNew: "Post",
           typePost: req.body.type,
@@ -115,10 +116,10 @@ router.post('/upload', upload.single('myFile'), (req, res) => {
           autor: req.user.username,
           description: req.body.description,
         }
-  
+
         News.inserir(news)
-        .then(() => console.log('New adicionada: Novo Post'))
-        .catch(e => console.log("Erro ao adicionar News de Post" + e))
+          .then(() => console.log('New adicionada: Novo Post'))
+          .catch(e => console.log("Erro ao adicionar News de Post" + e))
       }
     }
   })
@@ -139,13 +140,13 @@ router.post('/comment/:idPost', function (req, res) {
 
   var news = {
     typeNew: "Comment",
-    autor: req.user.username, 
+    autor: req.user.username,
     comment: req.body.comment
   }
 
   News.inserir(news)
-  .then(() => console.log('NEW: Novo Comentário '))
-  .catch(e => console.log("Erro ao adicionar News de Comentário " + e))
+    .then(() => console.log('NEW: Novo Comentário '))
+    .catch(e => console.log("Erro ao adicionar News de Comentário " + e))
 
   res.redirect('back');
 })
@@ -210,7 +211,7 @@ module.exports = router;
 //       var filteredList = []
 
 //       dados.forEach(p => {
-        
+
 //       });
 
 //       res.render('posts/posts', {

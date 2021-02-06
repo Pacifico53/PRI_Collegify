@@ -31,11 +31,11 @@ module.exports.eliminar = id => {
 }
 
 // Atualiza um Post por 'id'
-module.exports.atualizar = (id, Post) => {
+module.exports.atualizar = (id, newPost) => {
   return Post
     .updateOne({
       _id: id
-    }, Post)
+    }, newPost)
 }
 
 // Devolve uma lista de Posts por 'titulo'
