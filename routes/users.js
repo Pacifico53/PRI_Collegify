@@ -75,11 +75,34 @@ router.post('/update/:idUser', (req, res) => {
 })
 
 //GET user page
-router.get('/:idUser', (req, res) => {
-    var idUser = req.params.idUser
+router.get('/profilePage', (req, res) => {
+    console.log(req.user);
+    var idUser = req.user._id
     User.consultar(idUser)
         .then(dados => res.render('users/user', {
-            infouser: dados
+            infouser: dados,
+            checksame: true,
+            title: "Página de Perfil"
+        }))
+        .catch(e => res.render('error', {
+            error: e
+        }))
+})
+
+//GET user page
+router.get('/:uname', (req, res) => {
+    var uname = req.params.uname;
+    var checksame = false
+    if (uname == req.user.username) {
+        checksame = true;
+        console.log("TRUEEE");
+    }
+
+    User.lookUpUsername(uname)
+        .then(dados => res.render('users/user', {
+            infouser: dados,
+            checksame: checksame,
+            title: "Página de Perfil"
         }))
         .catch(e => res.render('error', {
             error: e

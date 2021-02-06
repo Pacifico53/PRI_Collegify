@@ -2,11 +2,11 @@ extends ../layout
 
 block content
     .w3-container.w3-sand.w3-margin.w3-border
-      form.w3-container(action=`/posts/${idPost}/edit` method="POST" enctype="multipart/form-data" id="form-upload")
+      form.w3-container(action=`/posts/${idPost}/edit` method="POST" enctype="multipart/form-data")
         p
         label.w3-bold Título
         input.w3-input.w3-border(name="title" type="text" value=`${post.title}`)
-        p      
+        p
         label.w3-bold Subtitle
         input.w3-input.w3-border(name="subtitle" type="text" value=`${post.subtitle}`)
         p      
@@ -25,7 +25,7 @@ block content
         label.w3-bold Unidade Curricular
         input.w3-input.w3-border(name="cadeira" type="text" value=`${post.meta.cadeira}`)
         p
-        lable Tipo de Post
+        label Tipo de Post
           select(name="type").w3-input.w3-border
             option(value="Relatório" selected) Relatório
             option(value="Tpc") Tpc

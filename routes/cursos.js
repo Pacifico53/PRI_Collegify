@@ -33,7 +33,7 @@ router.get('/:idCurso/ano/:ano/semestre/:sem/uc/:uc', verificaAutenticacao, (req
   Post.listarDeCursoAnoSemestreUC(req.params.idCurso, req.params.ano, req.params.sem, req.params.uc)
     .then(dados => res.render('cursos/cursoUC', {
       title: 'Posts de ' + req.params.idCurso + ' ' + req.params.ano +
-             'º ano ' + req.params.sem + 'º semestre ' + req.params.uc,
+        'º ano ' + req.params.sem + 'º semestre ' + req.params.uc,
       lista: dados,
     }))
     .catch(e => res.render('error', {

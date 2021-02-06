@@ -19,23 +19,24 @@ block content
     else
       div(class="w3-container")
         p Erro: User not found...
-    div(class="w3-container w3-sand")
-      input(class="w3-btn w3-khaki" type="button" value=`Edit Info` id="esconder" onclick="editar()")
-    div(class="w3-container w3-khaki" id="mostrar" hidden)
-      form(method='POST' action=`/users/update/${infouser._id}`)
-        div
-          input(name="name" type="text" placeholder=`New name`)
-        div
-          input(name="username" type="text" placeholder=`New username`)
-        div 
-          input(name="email" type="text" placeholder=`New email`)
-        div 
-          input(name="password" type="text" placeholder=`New password`)
-        div  
-          input(class="w3-btn" type='submit' value='Edit' style="background-color:  #008CBA")
-        input(class="w3-btn" type="reset" value=`Cancel` style="background-color:  #916663" onclick="editar()")
-      form(method='POST' action=`/users/delete/${infouser._id}`)
-        input(class="w3-btn" type='submit' value='Delete' style="background-color:  #FF0000")
+    if checksame
+      div(class="w3-container w3-sand")
+        input(class="w3-btn w3-khaki" type="button" value=`Edit Info` id="esconder" onclick="editar()")
+      div(class="w3-container w3-khaki" id="mostrar" hidden)
+        form(method='POST' action=`/users/update/${infouser._id}`)
+          div
+            input(name="name" type="text" placeholder=`New name`)
+          div
+            input(name="username" type="text" placeholder=`New username`)
+          div 
+            input(name="email" type="text" placeholder=`New email`)
+          div 
+            input(name="password" type="text" placeholder=`New password`)
+          div  
+            input(class="w3-btn" type='submit' value='Edit' style="background-color:  #008CBA")
+          input(class="w3-btn" type="reset" value=`Cancel` style="background-color:  #916663" onclick="editar()")
+        form(method='POST' action=`/users/delete/${infouser._id}`)
+          input(class="w3-btn" type='submit' value='Delete' style="background-color:  #FF0000")
     div(class="w3-container w3-sand")
       p
         a(href='/') Back to homepage.
