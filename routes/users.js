@@ -119,6 +119,7 @@ router.post('/update/:idUser', verificaAutenticacao, (req, res) => {
         console.log("Username ou email já utilizado");
         res.render('users/user', {
           title: "Página de Perfil",
+          checksame: true,
           infouser: req.user,
           errormsg: 'Username ou email já em utilização.'
         });
