@@ -20,12 +20,12 @@ html
 
     form(action="/posts/like/" + post._id method="POST")
       p
-      button.w3-hover-yellow.w3-border.w3-deep-orange.w3-round-xxlarge.w3-margin(type="submit" name="like") Like
+      button.w3-btn.w3-hover-yellow.w3-border.w3-deep-orange.w3-round-xxlarge(type="submit" name="like") Like
       p
 
     form(action="/posts/fav/" + post._id method="POST")
       p
-      button.w3-hover-yellow.w3-border.w3-deep-orange.w3-round-xxlarge.w3-margin(type="submit" name="favorite") Adicionar aos Favoritos
+      button.w3-btn.w3-hover-yellow.w3-border.w3-deep-orange.w3-round-xxlarge(type="submit" name="favorite") Adicionar aos Favoritos
       p
     p Publicado por 
       a(href='/users/'+post.uploader) #{post.uploader} 

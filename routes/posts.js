@@ -16,7 +16,8 @@ router.get('/', verificaAutenticacao, function (req, res, next) {
   Post.listar()
     .then(dados => res.render('posts/posts', {
       title: 'Lista de Posts',
-      lista: dados
+      lista: dados,
+      username: req.user.username
     }))
     .catch(e => res.render('error', {
       error: e
