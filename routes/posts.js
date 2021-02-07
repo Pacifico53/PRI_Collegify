@@ -49,16 +49,16 @@ router.get('/:idPost/edit', verificaAutenticacao, (req, res) => {
     }))
 })
 
-// POST edit post TODO ISTO VSI DESAPARECER E SO VAI DAR PARA APAGAR
-router.get('/:idPost/delete', (req, res) => {
-  var idPost = req.params.idPost
+// // POST edit post TODO ISTO VSI DESAPARECER E SO VAI DAR PARA APAGAR
+// router.get('/:idPost/delete', (req, res) => {
+//   var idPost = req.params.idPost
 
-  Post.eliminar(idPost)
-    .then(() => res.redirect('/posts'))
-    .catch(e => res.render('error', {
-      error: e
-    }))
-})
+//   Post.eliminar(idPost)
+//     .then(() => res.redirect('/posts'))
+//     .catch(e => res.render('error', {
+//       error: e
+//     }))
+// })
 
 // GET upload page
 router.get('/upload', verificaAutenticacao, (req, res) => {
@@ -96,7 +96,6 @@ router.post('/upload', upload.single('myFile'), (req, res) => {
         }
       }
 
-      console.log(post);
       Post.inserir(post)
         .then(p => {
           res.redirect('/posts')
@@ -113,9 +112,8 @@ router.post('/upload', upload.single('myFile'), (req, res) => {
               description: p.description
             }
 
-            console.log(news);
             News.inserir(news)
-              .then(dados => console.log('New adicionada: Novo Post' + dados))
+              .then(dados => console.log('Adicionado ao feed: Novo Post' + dados))
               .catch(e => console.log("Erro ao adicionar News de Post" + e))
           }
     
@@ -143,7 +141,8 @@ router.post('/comment/:idPost', function (req, res) {
   var news = {
     typeNew: "Comment",
     autor: req.user.username,
-    comment: req.body.comment
+    comment: req.body.comment,
+    ogpost: 'posts/' + req.params.idPost
   }
 
   News.inserir(news)
