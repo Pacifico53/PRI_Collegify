@@ -62,13 +62,18 @@ router.post('/signup', (req, res) => {
 
 // POST delete user
 router.post("/delete/:idUser", verificaAutenticacao, function (req, res) {
-  User.eliminar(req.params.idUser)
-    .then(() => {
-      res.render('users/deleted')
-    })
-    .catch(e => res.render('error', {
-      error: e
-    }))
+  if (req.user.level == admin || req.user._id == req.params.idUser) {
+    User.eliminar(req.params.idUser)
+      .then(() => {
+        res.render('users/deleted')
+      })
+      .catch(e => res.render('error', {
+        error: e
+      }))
+  }
+  else{
+    res.redirect('/');
+  }
 })
 
 // POST update user
