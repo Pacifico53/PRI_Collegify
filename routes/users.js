@@ -3,6 +3,7 @@ var router = express.Router();
 var passport = require('passport')
 
 const User = require('../controllers/user');
+const Post = require('../controllers/post');
 
 // GET users listing.
 router.get('/', function (req, res, next) {
@@ -82,7 +83,7 @@ router.post('/update/:idUser', (req, res) => {
     }))
 })
 
-//GET user page
+//GET TODO PAGINA DE COMPLETAR SIGNUP
 router.get('/finishSignup', (req, res) => {
   res.render('users/finishSignup', {
     title: "Finalizar nova conta"
@@ -98,6 +99,19 @@ router.get('/profilePage', (req, res) => {
       infouser: dados,
       checksame: true,
       title: "Página de Perfil"
+    }))
+    .catch(e => res.render('error', {
+      error: e
+    }))
+})
+
+//GET posts favoritos de user
+router.get('/:uname/favs', (req, res) => {
+  var arrayIds = req.user.favPostIds;
+  Post.listarArray(arrayIds)
+    .then(dados => res.render('posts/posts', {
+      title: 'Posts Favoritos',
+      lista: dados
     }))
     .catch(e => res.render('error', {
       error: e

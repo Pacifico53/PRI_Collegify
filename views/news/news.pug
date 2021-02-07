@@ -14,6 +14,7 @@ block content
                     else   
                         h4 Nova #{a.typePost}
                     h5 #{a.title}
+                        //a(href='/posts/' + a.idPost)= a.title TODO METER IDS DOS POSTS NAS NEWS
                     hr.w3-clear
                     p #{a.description}
                     p #{a.autor} - #{a.date.toLocaleString('pt-PT')}

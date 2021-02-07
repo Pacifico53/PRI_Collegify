@@ -22,6 +22,19 @@ router.get('/', verificaAutenticacao, function (req, res, next) {
     }))
 });
 
+// GET posts page.
+router.get('/tag/:tag', verificaAutenticacao, function (req, res, next) {
+  Post.listarTagged(req.params.tag)
+    .then(dados => res.render('posts/taggedPosts', {
+      title: 'Lista de Posts com Tag ' + req.params.tag,
+      lista: dados
+    }))
+    .catch(e => res.render('error', {
+      error: e
+    }))
+});
+
+
 // GET post edit page
 router.get('/:idPost/edit', verificaAutenticacao, (req, res) => {
   var idPost = req.params.idPost

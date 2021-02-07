@@ -135,6 +135,25 @@ module.exports.addLikeToComment = (idPost, username, index) => {
     })
 }
 
+// Devolve uma lista de Posts com certa tag
+module.exports.listarTagged = (tag) => {
+  return Post
+    .find({
+      'tags': tag
+    })
+    .exec()
+}
+
+// Devolve uma lista de Posts com ids de um array
+module.exports.listarArray = (arrayIds) => {
+  return Post
+    .find({
+      '_id': { $in: arrayIds}
+    })
+    .exec()
+}
+
+
 // Search posts TODO
 module.exports.searchFilter = (params) => {
   return Post

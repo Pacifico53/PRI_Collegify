@@ -18,7 +18,8 @@ block content
         p Curso: #{infouser.curso}
         p Data de Registo: #{infouser.dateRegister.toLocaleString('pt-PT')}
         p Data de Ultimo Logout: #{infouser.dateLast.toLocaleString('pt-PT')}
-
+        p
+          a(href='/users/'+infouser.username+'/favs') Posts Favoritos
     else
       div(class="w3-container")
         p Erro: User not found...

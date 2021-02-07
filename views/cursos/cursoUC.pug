@@ -11,6 +11,7 @@ block content
             th Subtitle
             th Uploader
             th Tags
+            th Feedback
           each a in lista
             tr
               td= a.type
@@ -18,7 +19,14 @@ block content
                 a(href='/posts/'+a._id) #{a.title}
               td= a.subtitle
               td= a.uploader
-              td= a.tags
+              td
+                each tag in a.tags
+                  span.w3-tag.w3-teal
+                    a(href='/posts/tag/'+tag)= tag
+                  span
+              td ⭐#{a.meta.favs.length} 👍#{a.meta.votes.length} 💬#{a.comments.length}
+
+
     else
       div(class="w3-container")
         p There are no posts...

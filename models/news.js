@@ -8,7 +8,6 @@ var NewsSchema = new mongoose.Schema({
     autor: { type: String, required: true },   
     date: { type: Date, default: Date.now },
     comment: { type: String }                  // Comment Only
-
 });
 
 module.exports = mongoose.model('News', NewsSchema, 'news') 
