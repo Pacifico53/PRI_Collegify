@@ -117,7 +117,9 @@ router.post('/update/:idUser', verificaAutenticacao, (req, res) => {
 
       if (unames.includes(user.username || emails.includes(user.email))) {
         console.log("Username ou email já utilizado");
-        res.render('/users/' + req.user.username, {
+        res.render('users/user', {
+          title: "Página de Perfil",
+          infouser: req.user,
           errormsg: 'Username ou email já em utilização.'
         });
       }
