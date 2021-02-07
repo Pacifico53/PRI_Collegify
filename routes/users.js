@@ -85,12 +85,11 @@ router.post('/update/:idUser', verificaAutenticacao, (req, res) => {
 })
 
 //GET TODO PAGINA DE COMPLETAR SIGNUP
-router.get('/finishSignup', (req, res) => {
-  res.render('users/finishSignup', {
-    title: "Finalizar nova conta"
-  });
-})
-
+//router.get('/finishSignup', (req, res) => {
+//  res.render('users/finishSignup', {
+//    title: "Finalizar nova conta"
+//  });
+//})
 
 //GET user page
 router.get('/profilePage', verificaAutenticacao, (req, res) => {
