@@ -16,7 +16,7 @@ module.exports = passport.use(new LocalStrategy(
         return done(null, user)
       })
       .catch(erro => {
-        console.log("erro")
+        console.log("Erro local strategy")
         done(erro)
       })
   })
