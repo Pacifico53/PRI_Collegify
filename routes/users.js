@@ -123,7 +123,7 @@ router.get('/:uname', (req, res) => {
   var uname = req.params.uname;
   var checksame = false
 
-  if (uname == req.user.username) {
+  if (uname == req.user.username || req.user.level == 'admin') {
     checksame = true;
   }
 

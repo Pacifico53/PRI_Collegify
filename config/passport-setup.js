@@ -118,7 +118,8 @@ passport.use(new FacebookStrategy({
   function (req, accessToken, refreshToken, profile, done) {
     console.log('Facebook callback function fired')
     console.log(profile)
-    var resultUsername = profile.name.givenName + profile.name.familyName
+    var resultUsername = profile.displayName;
+    resultUsername = resultUsername.trim();
 
     User.listar()
       .then(dados => {
