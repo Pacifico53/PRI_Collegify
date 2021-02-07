@@ -213,7 +213,6 @@ router.get('/:idPost', verificaAutenticacao, (req, res) => {
 module.exports = router;
 
 
-
 // // GET search page
 // router.get('/search', verificaAutenticacao, (req, res) => {
 //   res.render('posts/search', {
