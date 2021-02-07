@@ -45,7 +45,7 @@ nodemon
 #### Posts
  * GET /posts
  * GET /posts/tag/:tag
- * GET /posts/:idPost/edit
+ * GET /posts/:idPost/delete
  * GET /posts/upload
  * POST /posts/upload
  * GET /posts/download/:filename
@@ -61,7 +61,3 @@ nodemon
  * GET /cursos/:idCurso/ano/:ano/semestre/:sem/uc/:uc
  * GET /cursos/:idCurso/ano/:ano
  * GET /cursos/:idCurso
-
-#### News
- * GET /news
- * GET /news
