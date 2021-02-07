@@ -8,8 +8,8 @@ block content
     p
     if lista.length > 0
       .w3-container.w3-padding
-        table#myTable(class="w3-table-all w3-card-4 w3-hoverable")
-          tr
+        table.w3-table-all.w3-card-4.w3-hoverable(id='myTable')
+          tr.w3-orange
             th(onclick="sortTable(0)") Type
             th(onclick="sortTable(1)") Title
             th(onclick="sortTable(2)") Subtitle
