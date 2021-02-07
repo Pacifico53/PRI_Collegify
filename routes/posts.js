@@ -50,26 +50,10 @@ router.get('/:idPost/edit', verificaAutenticacao, (req, res) => {
 })
 
 // POST edit post TODO ISTO VSI DESAPARECER E SO VAI DAR PARA APAGAR
-router.post('/:idPost/edit', (req, res) => {
+router.get('/:idPost/delete', (req, res) => {
   var idPost = req.params.idPost
 
-  var post = {
-    type: req.body.type,
-    title: req.body.title,
-    subtitle: req.body.subtitle,
-    uploader: req.user.username,
-    description: req.body.description,
-    visibility: req.body.visibility,
-    // tags: req.body.tags,.split(" "),
-    meta: {
-      curso: req.body.curso,
-      ano: req.body.ano,
-      semestre: req.body.semestre,
-      cadeira: req.body.cadeira
-    }
-  }
-
-  Post.atualizar(idPost, post)
+  Post.eliminar(idPost)
     .then(() => res.redirect('/posts'))
     .catch(e => res.render('error', {
       error: e
@@ -187,10 +171,17 @@ router.post('/likeComment/:index/:idPost', function (req, res) {
 router.get('/:idPost', verificaAutenticacao, (req, res) => {
   var post = req.params.idPost
   Post.consultar(post)
-    .then(dados => res.render('posts/post', {
-      title: 'Post',
-      post: dados
-    }))
+    .then(dados => {
+      var authorized = false;
+      if (req.user.username == dados.uploader || req.user.level == 'admin') {
+        authorized = true;
+      }
+      res.render('posts/post', {
+        title: 'Post',
+        authorized: authorized,
+        post: dados
+      })
+    })
     .catch(e => res.render('error', {
       error: e
     }))
@@ -226,7 +217,7 @@ module.exports = router;
 
 //       });
 
-//       res.render('posts/posts', {
+//       res.sts', {
 //         title: 'Lista de Posts',
 //         lista: filteredList
 //       })

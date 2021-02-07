@@ -41,7 +41,7 @@ passport.use(
         dados.forEach(user => {
           allunames.push(user.username)
         });
-        
+
         if (allunames.includes(resultUsername)) {
           console.log('Found same username!');
           var done = true;
@@ -119,6 +119,7 @@ passport.use(new FacebookStrategy({
     console.log('Facebook callback function fired')
     console.log(profile)
     var resultUsername = profile.displayName.replace(/\s/g, '')
+
     User.listar()
       .then(dados => {
         var allunames = [];
