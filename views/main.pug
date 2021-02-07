@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  .w3-card-4
+  .w3-card-0
     p.w3-center.w3-padding
         b Bem vindo, #{username}.
     a.w3-btn.w3-blue.w3-hover-indigo.w3-left.w3-round-xxlarge.w3-margin(href="/posts/upload") Novo Post
@@ -13,15 +13,25 @@ block content
         each a in lista
           if a.typeNew == 'Post'
             .w3-card.w3-hover-shadow.w3-border.w3-round-xxlarge.w3-padding-large.w3-margin.w3-sand
-              if a.typePost == ('Relatório' || 'Tpc' || 'Artigo' || 'Teste')
-                h4 
-                  b Novo #{a.typePost}
-              else if a.typePost == ('Slides')
-                h4
-                  b Novos #{a.typePost}
-              else   
-                h4
-                  b Nova #{a.typePost}
+              case a.typePost
+                when 'Relatório'
+                  h4
+                    b Novo #{a.typePost}
+                when 'Tpc'
+                  h4 
+                    b Novo #{a.typePost}
+                when 'Artigo'
+                  h4 
+                    b Novo #{a.typePost}
+                when 'Teste'
+                  h4 
+                    b Novo #{a.typePost}
+                when 'Slides'
+                  h4 
+                    b Novos #{a.typePost}
+                default 
+                  h4 
+                    b Nova #{a.typePost}
               h5
                 a(href='/' + a.ogpost)= a.title
               hr.w3-clear
