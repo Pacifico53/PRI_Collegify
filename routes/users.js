@@ -1,12 +1,13 @@
 var express = require('express');
 var router = express.Router();
-var passport = require('passport')
+var passport = require('passport');
+var { verificaAutenticacao } = require('./common');
 
 const User = require('../controllers/user');
 const Post = require('../controllers/post');
 
 // GET users listing.
-router.get('/', function (req, res, next) {
+router.get('/', verificaAutenticacao, function (req, res, next) {
   User.listar()
     .then(dados => res.render('users/users', {
       title: "Lista de Users",
@@ -60,7 +61,7 @@ router.post('/signup', (req, res) => {
 })
 
 // POST delete user
-router.post("/delete/:idUser", function (req, res) {
+router.post("/delete/:idUser", verificaAutenticacao, function (req, res) {
   User.eliminar(req.params.idUser)
     .then(() => {
       res.render('users/deleted')
@@ -71,7 +72,7 @@ router.post("/delete/:idUser", function (req, res) {
 })
 
 // POST update user
-router.post('/update/:idUser', (req, res) => {
+router.post('/update/:idUser', verificaAutenticacao, (req, res) => {
   var idUser = req.params.idUser
   var user = req.body
   User.atualizar(idUser, user)
@@ -92,7 +93,7 @@ router.get('/finishSignup', (req, res) => {
 
 
 //GET user page
-router.get('/profilePage', (req, res) => {
+router.get('/profilePage', verificaAutenticacao, (req, res) => {
   var idUser = req.user._id
   User.consultar(idUser)
     .then(dados => res.render('users/user', {
@@ -106,7 +107,7 @@ router.get('/profilePage', (req, res) => {
 })
 
 //GET posts favoritos de user
-router.get('/:uname/favs', (req, res) => {
+router.get('/:uname/favs', verificaAutenticacao, (req, res) => {
   var arrayIds = req.user.favPostIds;
   Post.listarArray(arrayIds)
     .then(dados => res.render('posts/posts', {
@@ -119,7 +120,7 @@ router.get('/:uname/favs', (req, res) => {
 })
 
 //GET user page
-router.get('/:uname', (req, res) => {
+router.get('/:uname', verificaAutenticacao, (req, res) => {
   var uname = req.params.uname;
   var checksame = false
 

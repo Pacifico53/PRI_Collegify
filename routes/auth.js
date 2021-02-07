@@ -21,9 +21,11 @@ router.get('/google/callback',
   });
 
 // Facebook
+// GET to autenticate/signup
 router.get('/facebook',
   passport.authenticate('facebook', { scope: ['email'] }));
 
+// GET facebook callback 
 router.get('/facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/login' }),
   function (req, res) {
@@ -35,7 +37,6 @@ router.get('/facebook/callback',
       res.redirect('/main')
     }
   });
-// TODO
 // Github
 // TODO
 
