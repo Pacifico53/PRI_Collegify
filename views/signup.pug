@@ -31,6 +31,9 @@ html
         label.w3-bold Curso
         input.w3-input.w3-border(name="curso" type="text")
         p
+        if(errormsg)
+          p
+            b #{errormsg}
         button.w3-btn.w3-deep-orange.w3-hover-black.w3-round-xxlarge.w3-margin(type="submit") Sign Up
       .w3-container
         a.w3-btn.w3-round-xxlarge.w3-margin.w3-pale-red(href="/auth/google") Signup With Google

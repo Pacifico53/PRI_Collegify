@@ -53,8 +53,32 @@ router.post('/signup', (req, res) => {
     affiliation: req.body.affiliation,
     password: req.body.password
   }
-  User.inserir(user)
-    .then(() => res.redirect('/login'))
+
+  var unames = []
+  var emails = []
+
+  User.listar()
+    .then(dados => {
+      dados.forEach(u => {
+        unames.push(u.username);
+        emails.push(u.email);
+      });
+
+      if (unames.includes(user.username || emails.includes(user.email))) {
+        console.log("Username ou email já utilizado");
+        res.render('signup', {
+          title: 'Registar',
+          errormsg: "Username ou email já em utilização."
+        });
+      }
+      else {
+        User.inserir(user)
+          .then(() => res.redirect('/login'))
+          .catch(e => res.render('error', {
+            error: e
+          }))
+      }
+    })
     .catch(e => res.render('error', {
       error: e
     }))
@@ -71,7 +95,7 @@ router.post("/delete/:idUser", verificaAutenticacao, function (req, res) {
         error: e
       }))
   }
-  else{
+  else {
     res.redirect('/');
   }
 })
@@ -80,13 +104,40 @@ router.post("/delete/:idUser", verificaAutenticacao, function (req, res) {
 router.post('/update/:idUser', verificaAutenticacao, (req, res) => {
   var idUser = req.params.idUser
   var user = req.body
-  User.atualizar(idUser, user)
-    .then(() => {
-      res.render('users/userUpdate')
+
+  var unames = []
+  var emails = []
+
+  User.listar()
+    .then(dados => {
+      dados.forEach(u => {
+        unames.push(u.username);
+        emails.push(u.email);
+      });
+
+      if (unames.includes(user.username || emails.includes(user.email))) {
+        console.log("Username ou email já utilizado");
+        res.render('users/user', {
+          title: "Página de Perfil",
+          checksame: true,
+          infouser: req.user,
+          errormsg: 'Username ou email já em utilização.'
+        });
+      }
+      else {
+        User.atualizar(idUser, user)
+          .then(() => {
+            res.render('users/userUpdate')
+          })
+          .catch(e => res.render('error', {
+            error: e
+          }))
+      }
     })
     .catch(e => res.render('error', {
       error: e
     }))
+
 })
 
 //GET TODO PAGINA DE COMPLETAR SIGNUP
