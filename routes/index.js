@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var { verificaAutenticacao } = require('./common');
 
 const News = require('../controllers/news');
 
@@ -34,14 +35,5 @@ router.get('/main', verificaAutenticacao, function (req, res) {
       error: e
     }))
 });
-
-function verificaAutenticacao(req, res, next) {
-  if (req.isAuthenticated()) {
-    //req.isAuthenticated() will return true if user is logged in
-    next();
-  } else {
-    res.redirect("/login");
-  }
-}
 
 module.exports = router;

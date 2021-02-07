@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var fs = require('fs')
 var passport = require('passport')
+var { verificaAutenticacao } = require('./common');
 
 const Post = require('../controllers/post');
 const User = require('../controllers/user')
@@ -101,7 +102,7 @@ router.post('/upload', upload.single('myFile'), (req, res) => {
           res.redirect('/posts')
 
           if (p.visibility == "Público") {
-            var ogpostId = 'posts/' +  p._id.toString();
+            var ogpostId = 'posts/' + p._id.toString();
 
             var news = {
               typeNew: "Post",
@@ -116,7 +117,7 @@ router.post('/upload', upload.single('myFile'), (req, res) => {
               .then(dados => console.log('Adicionado ao feed: Novo Post' + dados))
               .catch(e => console.log("Erro ao adicionar News de Post" + e))
           }
-    
+
         })
         .catch(e => res.render('error', {
           error: e
@@ -191,15 +192,6 @@ router.get('/:idPost', verificaAutenticacao, (req, res) => {
       error: e
     }))
 });
-
-function verificaAutenticacao(req, res, next) {
-  if (req.isAuthenticated()) {
-    //req.isAuthenticated() will return true if user is logged in
-    next();
-  } else {
-    res.redirect("/login");
-  }
-}
 
 module.exports = router;
 
