@@ -11,7 +11,7 @@ block content
               values.push(val.meta.cadeira)
             }
         - values.sort();
-        ul
+        ul.w3-ul.w3-card-4.w3-margin.w3-hoverable
           each val in values
             li
               a(href=path + '/uc/' + val) #{val}

@@ -7,44 +7,36 @@ block content
     p
     if lista.length > 0
       .w3-container.w3-padding
-        table#myTable(class="w3-table-all")
+        table#myTable(class="w3-table-all w3-card-4 w3-hoverable")
           tr
             th(onclick="sortTable(0)") Type
             th(onclick="sortTable(1)") Title
             th(onclick="sortTable(2)") Subtitle
             th(onclick="sortTable(3)") Uploader
-            th(onclick="sortTable(4)") Description
-            th(onclick="sortTable(5)") Date Creation
-            th(onclick="sortTable(6)") Date Register
-            th(onclick="sortTable(7)") Visibility
-            th(onclick="sortTable(8)") Comments
-            th(onclick="sortTable(9)") Tags
-            th(onclick="sortTable(10)") Meta
+            th(onclick="sortTable(4)") Date
+            th(onclick="sortTable(5)") Visibility
+            th(onclick="sortTable(6)") Tags
+            th(onclick="sortTable(7)") Curso
+            th(onclick="sortTable(8)") UC
+            th(onclick="sortTable(9)") Feedback
           each a in lista
             
             tr
-              td
-                a(href='/posts/'+a._id)= a.type
+              td #{a.type}
               td
                 a(href='/posts/'+a._id)= a.title
-              td
-                a(href='/posts/'+a._id)= a.subtitle
-              td
+              td #{a.subtitle}
+              td 
                 a(href='/posts/'+a._id)= a.uploader
-              td
-                a(href='/posts/'+a._id)= a.description
-              td
-                a(href='/posts/'+a._id)= a.dateCreation.toLocaleString('pt-PT')
-              td
-                a(href='/posts/'+a._id)= a.dateRegister.toLocaleString('pt-PT')
-              td
-                a(href='/posts/'+a._id)= a.visibility
-              td
-                a(href='/posts/'+a._id)= a.comments.length
-              td
-                a(href='/posts/'+a._id)= a.tags
-              td
-                a(href='/posts/'+a._id)= a.meta
+              td #{a.dateCreation.toLocaleString('pt-PT')}
+              td #{a.visibility}
+              td 
+                each tag in a.tags
+                  span.w3-tag.w3-teal #{tag}
+                  span  
+              td #{a.meta.curso}
+              td #{a.meta.cadeira}
+              td ⭐#{a.meta.favs.length} 👍#{a.meta.votes.length} 💬#{a.comments.length}
     else
       div(class="w3-container")
         p There are no posts...

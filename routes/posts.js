@@ -109,14 +109,15 @@ router.post('/upload', upload.single('myFile'), (req, res) => {
       if (req.body.visibility == "Público") {
         var news = {
           typeNew: "Post",
+          postId: req.body._id,
           typePost: req.body.type,
           title: req.body.title,
           autor: req.user.username,
-          description: req.body.description,
+          description: req.body.description
         }
 
         News.inserir(news)
-          .then(() => console.log('New adicionada: Novo Post'))
+          .then(dados => console.log('New adicionada: Novo Post' + dados))
           .catch(e => console.log("Erro ao adicionar News de Post" + e))
       }
     }

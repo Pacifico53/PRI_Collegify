@@ -14,7 +14,6 @@ block content
             th Data registo
             th Data Last
             th Filiaçao
-            th Password
           each a in lista
             tr
               td
@@ -23,10 +22,9 @@ block content
               td= a.email
               td= a.level
               td= a.curso
-              td= a.dateRegister
-              td= a.dateLast
+              td= a.dateRegister.toLocaleString('pt-PT')
+              td= a.dateLast.toLocaleString('pt-PT')
               td= a.affiliation
-              td= a.password
     else
       div(class="w3-container")
         p There are no users...

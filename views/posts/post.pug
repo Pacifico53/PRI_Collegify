@@ -10,9 +10,9 @@ html
         a.w3-btn.w3-black.w3-round.w3-margin(href="/users/logout") Logout
 
   .w3-container.w3-sand.w3-margin.w3-border
-    h2 Título: #{post.title}
+    h2 #{post.title}
     if (post.subtitle)
-      h3 Subtítulo: #{post.subtitle}
+      h3 #{post.subtitle}
     p Descrição: #{post.description}
     p
       | #{post.meta.favs.length} Favoritos
