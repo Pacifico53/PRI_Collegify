@@ -12,52 +12,49 @@ block content
     if infouser != null
       header.w3-container.w3-khaki
         h3 #{infouser.name}
-      div(class="w3-container w3-sand")
+      .w3-container.w3-sand
         p Username: #{infouser.username}
         p Email: #{infouser.email}
         p Curso: #{infouser.curso}
         p Data de Registo: #{infouser.dateRegister.toLocaleString('pt-PT')}
         p Data de Ultimo Logout: #{infouser.dateLast.toLocaleString('pt-PT')}
         p
-          a(href='/users/'+infouser.username+'/favs') Posts Favoritos
+          a.w3-btn.w3-hover-amber.w3-yellow.w3-round-xxlarge.w3-margin(href='/users/'+infouser.username+'/favs') Posts Favoritos
     else
-      div(class="w3-container")
+      .w3-container
         p Erro: User not found...
     if checksame
-      div(class="w3-container w3-sand")
+      .w3-container.w3-sand
         a.w3-btn.w3-round-xlarge.w3-pale-red(href="/auth/google") Link conta Google 
         p
         a.w3-btn.w3-round-xlarge.w3-blue(href="/auth/facebook") Link conta Facebook
         p
-        input(class="w3-btn w3-khaki w3-round-xlarge" type="button" value=`Edit Info` id="esconder" onclick="editar()")
-      div(class="w3-container w3-khaki" id="mostrar" hidden)
+        input.w3-btn.w3-khaki.w3-round-xlarge.w3-margin(type="button" value=`Edit Info` id="esconder" onclick="editar()")
+      .w3-container.w3-khaki(id="mostrar" hidden)
         form(method='POST' action=`/users/update/${infouser._id}`)
-          div
-            label Novo name
-            input(name="name" type="text" value=infouser.name)
-          div
-            label Novo Username
-            input(name="username" type="text" value=infouser.username)
-          div
-            label Novo E-mail
-            input(name="email" type="text" value=infouser.email)
-          div
-            label Novo Curso
-            input(name="curso" type="text" value=infouser.curso)
-
-          div
-            label Nova Password
-            input(name="password" type="password" value=infouser.password)
-          div  
-            input(class="w3-btn" type='submit' value='Edit' style="background-color:  #008CBA")
-          input(class="w3-btn" type="reset" value=`Cancel` style="background-color:  #916663" onclick="editar()")
+          p
+            label.w3-bold Novo nome
+            input.w3-input.w3-border(name="name" type="text" value=infouser.name)
+          p
+            label.w3-bold Novo Username
+            input.w3-input.w3-border(name="username" type="text" value=infouser.username)
+          p
+            label.w3-bold Novo E-mail
+            input.w3-input.w3-border(name="email" type="text" value=infouser.email)
+          p
+            label.w3-bold Novo Curso
+            input.w3-input.w3-border(name="curso" type="text" value=infouser.curso)
+          p
+            label.w3-bold Nova Password
+            input.w3-input.w3-border(name="password" type="password" value=infouser.password)
+          p  
+            input.w3-btn.w3-blue.w3-round-xxlarge(type='submit' value='Edit' style="background-color:  #008CBA")
+          input.w3-btn.w3-brown.w3-round-xxlarge(type="reset" value=`Cancel` style="background-color:  #916663" onclick="editar()")
         form(method='POST' action=`/users/delete/${infouser._id}`)
-          input(class="w3-btn" type='submit' value='Delete' style="background-color:  #FF0000")
+          button.w3-right.w3-btn.w3-red.w3-round-xxlarge.w3-margin(type="submit") Apagar conta
 
-    div(class="w3-container w3-sand")
-      p
-        a(href='/') Back to homepage.
-      p
-        a(href='/users') Back to user list.
-    footer(class="w3-container w3-khaki")
-      address Gerado por Collegify :: 2020
+
+
+    .w3-container.w3-deep-orange.w3-center
+      a.w3-btn.w3-hover-orange.w3-sand.w3-round-xxlarge.w3-margin(href="/") Voltar a homepage
+      a.w3-center.w3-padding Gerado por Collegify :: 20200
