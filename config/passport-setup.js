@@ -32,18 +32,24 @@ passport.use(
   }, (req, accessToken, refreshToken, profile, done) => {
     console.log('Google callback function fired')
     console.log(profile)
-    var resultUsername = profile.displayName
-    resultUsername.replace(/\s/g,'');
+    var resultUsername = profile.name.givenName + profile.name.familyName
 
     User.listar()
       .then(dados => {
-        if (dados.includes(resultUsername)) {
+        var allunames = [];
+
+        dados.forEach(user => {
+          allunames.push(user.username)
+        });
+        
+        if (allunames.includes(resultUsername)) {
+          console.log('Found same username!');
           var done = true;
           var i = 0;
 
           while (done) {
             resultUsername = resultUsername + i;
-            if (!dados.includes(resultUsername)) {
+            if (!allunames.includes(resultUsername)) {
               done = false;
             }
             i++;
@@ -112,18 +118,23 @@ passport.use(new FacebookStrategy({
   function (req, accessToken, refreshToken, profile, done) {
     console.log('Facebook callback function fired')
     console.log(profile)
-    var resultUsername = profile.displayName
-    resultUsername.replace(/\s/g,'');
+    var resultUsername = profile.name.givenName + profile.name.familyName
 
     User.listar()
       .then(dados => {
-        if (dados.includes(resultUsername)) {
+        var allunames = [];
+
+        dados.forEach(user => {
+          allunames.push(user.username)
+        });
+
+        if (allunames.includes(resultUsername)) {
           var done = true;
           var i = 0;
 
           while (done) {
             resultUsername = resultUsername + i;
-            if (!dados.includes(resultUsername)) {
+            if (!allunames.includes(resultUsername)) {
               done = false;
             }
             i++;
