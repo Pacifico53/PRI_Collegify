@@ -64,11 +64,16 @@ router.post('/signup', (req, res) => {
         emails.push(u.email);
       });
 
-      if (unames.includes(user.username || emails.includes(user.email))) {
+      if (unames.includes(user.username)) {
+        var errormsg = 'Username indisponível'
+      } else if (emails.includes(user.email)) {
+        var errormsg = 'Email indisponível'
+      } if (errormsg) {
+        console.log(errormsg)
         console.log("Username ou email já utilizado");
         res.render('signup', {
           title: 'Registar',
-          errormsg: "Username ou email já em utilização."
+          errormsg: errormsg
         });
       }
       else {
@@ -114,17 +119,19 @@ router.post('/update/:idUser', verificaAutenticacao, (req, res) => {
         unames.push(u.username);
         emails.push(u.email);
       });
-
-      if (unames.includes(user.username || emails.includes(user.email))) {
-        console.log("Username ou email já utilizado");
+      if (unames.includes(user.username)) {
+        var errormsg = 'Username indisponível'
+      } else if (emails.includes(user.email)) {
+        var errormsg = 'Email indisponível'
+      } if (errormsg) {
+        console.log(errormsg)
         res.render('users/user', {
           title: "Página de Perfil",
           checksame: true,
           infouser: req.user,
-          errormsg: 'Username ou email já em utilização.'
+          errormsg: errormsg
         });
-      }
-      else {
+      } else {
         User.atualizar(idUser, user)
           .then(() => {
             res.render('users/userUpdate')
