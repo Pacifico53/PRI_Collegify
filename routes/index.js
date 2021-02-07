@@ -25,11 +25,11 @@ router.get('/signup', function (req, res) {
 
 /* GET main page. */
 router.get('/main', verificaAutenticacao, function (req, res) {
-  News.listar()
+  News.listar10()
     .then(dados => res.render('main', {
       title: 'Collegify',
       username: req.user.name,
-      list: dados
+      lista: dados
     }))
     .catch(e => res.render('error', {
       error: e

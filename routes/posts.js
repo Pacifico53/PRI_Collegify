@@ -50,16 +50,16 @@ router.get('/:idPost/edit', verificaAutenticacao, (req, res) => {
     }))
 })
 
-// // POST edit post TODO ISTO VSI DESAPARECER E SO VAI DAR PARA APAGAR
-// router.get('/:idPost/delete', (req, res) => {
-//   var idPost = req.params.idPost
+// GET delete post
+router.get('/:idPost/delete', (req, res) => {
+  var idPost = req.params.idPost
 
-//   Post.eliminar(idPost)
-//     .then(() => res.redirect('/posts'))
-//     .catch(e => res.render('error', {
-//       error: e
-//     }))
-// })
+  Post.eliminar(idPost)
+    .then(() => res.redirect('/posts'))
+    .catch(e => res.render('error', {
+      error: e
+    }))
+})
 
 // GET upload page
 router.get('/upload', verificaAutenticacao, (req, res) => {
@@ -117,7 +117,6 @@ router.post('/upload', upload.single('myFile'), (req, res) => {
               .then(dados => console.log('Adicionado ao feed: Novo Post' + dados))
               .catch(e => console.log("Erro ao adicionar News de Post" + e))
           }
-
         })
         .catch(e => res.render('error', {
           error: e
@@ -182,11 +181,29 @@ router.get('/:idPost', verificaAutenticacao, (req, res) => {
       if (req.user.username == dados.uploader || req.user.level == 'admin') {
         authorized = true;
       }
-      res.render('posts/post', {
-        title: 'Post',
-        authorized: authorized,
-        post: dados
-      })
+
+      if (dados.visibility == 'Privado') {
+        if (authorized) {
+          res.render('posts/post', {
+            title: 'Post',
+            authorized: authorized,
+            post: dados
+          })
+        }
+        else {
+          res.render('posts/privado',{
+            title: 'Post Privado'
+          });
+        }
+      }
+      else {
+        res.render('posts/post', {
+          title: 'Post',
+          authorized: authorized,
+          post: dados
+        })
+      }
+
     })
     .catch(e => res.render('error', {
       error: e
@@ -194,7 +211,6 @@ router.get('/:idPost', verificaAutenticacao, (req, res) => {
 });
 
 module.exports = router;
-
 
 
 // // GET search page
