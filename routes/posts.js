@@ -98,25 +98,31 @@ router.post('/upload', upload.single('myFile'), (req, res) => {
 
       console.log(post);
       Post.inserir(post)
-        .then(() => res.redirect('/posts'))
+        .then(p => {
+          res.redirect('/posts')
+
+          if (p.visibility == "Público") {
+            var ogpostId = 'posts/' +  p._id.toString();
+
+            var news = {
+              typeNew: "Post",
+              ogpost: ogpostId,
+              typePost: p.type,
+              title: p.title,
+              autor: p.uploader,
+              description: p.description
+            }
+
+            console.log(news);
+            News.inserir(news)
+              .then(dados => console.log('New adicionada: Novo Post' + dados))
+              .catch(e => console.log("Erro ao adicionar News de Post" + e))
+          }
+    
+        })
         .catch(e => res.render('error', {
           error: e
         }))
-
-      if (req.body.visibility == "Público") {
-        var news = {
-          typeNew: "Post",
-          postId: req.body._id,
-          typePost: req.body.type,
-          title: req.body.title,
-          autor: req.user.username,
-          description: req.body.description
-        }
-
-        News.inserir(news)
-          .then(dados => console.log('New adicionada: Novo Post' + dados))
-          .catch(e => console.log("Erro ao adicionar News de Post" + e))
-      }
     }
   })
 })

@@ -13,8 +13,8 @@ block content
                         h4 Novos #{a.typePost}
                     else   
                         h4 Nova #{a.typePost}
-                    h5 #{a.title}
-                        //a(href='/posts/' + a.idPost)= a.title TODO METER IDS DOS POSTS NAS NEWS
+                    h5
+                        a(href='/' + a.ogpost)= a.title
                     hr.w3-clear
                     p #{a.description}
                     p #{a.autor} - #{a.date.toLocaleString('pt-PT')}

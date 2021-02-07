@@ -2,12 +2,13 @@ var mongoose = require('mongoose')
 
 var NewsSchema = new mongoose.Schema({
     typeNew: { type: String, required: true }, // Post || Comment
-    typePost: { type: String },                // Post Only
-    description: { type: String },             // Post Only
-    title: { type: String },                   // Post Only
-    autor: { type: String, required: true },   
+    typePost: String,                // Post Only
+    description: String,             // Post Only
+    title: String,                   // Post Only
+    autor: { type: String, required: true },
     date: { type: Date, default: Date.now },
-    comment: { type: String }                  // Comment Only
+    comment: String,                 // Comment Only
+    ogpost: String
 });
 
 module.exports = mongoose.model('News', NewsSchema, 'news') 
