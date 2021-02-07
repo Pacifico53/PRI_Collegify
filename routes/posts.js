@@ -35,21 +35,6 @@ router.get('/tag/:tag', verificaAutenticacao, function (req, res, next) {
     }))
 });
 
-
-// GET post edit page
-router.get('/:idPost/edit', verificaAutenticacao, (req, res) => {
-  var idPost = req.params.idPost
-  Post.consultar(idPost)
-    .then(dados => res.render('posts/edit', {
-      title: 'Editar Post',
-      post: dados,
-      idPost: idPost
-    }))
-    .catch(e => res.render('error', {
-      error: e
-    }))
-})
-
 // GET delete post
 router.get('/:idPost/delete', (req, res) => {
   var idPost = req.params.idPost
@@ -191,7 +176,7 @@ router.get('/:idPost', verificaAutenticacao, (req, res) => {
           })
         }
         else {
-          res.render('posts/privado',{
+          res.render('posts/privado', {
             title: 'Post Privado'
           });
         }
